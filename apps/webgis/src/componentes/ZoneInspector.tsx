@@ -1,6 +1,7 @@
-import { ExternalLink, FileCheck2, Info, Sparkles } from 'lucide-react';
+import { BookOpen, ExternalLink, FileCheck2, Info, Sparkles } from 'lucide-react';
 import type { FeicaoSelecionada, MunicipioDetalhe } from '../types/domain';
 import { formatArea } from '../utils/format';
+import { obterExplicacaoCamada } from '../utils/layerExplainer';
 
 interface ZoneInspectorProps {
   municipio: MunicipioDetalhe;
@@ -135,9 +136,22 @@ export function ZoneInspector({ municipio, feicao, onAskAIWithZone }: ZoneInspec
 
   const usosDaFeicao = p.usos_admitidos ? String(p.usos_admitidos) : null;
   const avisoFeicao = p.aviso_origem ? String(p.aviso_origem) : null;
+  const expCamada = obterExplicacaoCamada(feicao.camadaNome, feicao.categoria);
 
   return (
     <div className="space-y-3.5 p-3.5 text-xs">
+      {/* Explicação didática imediata da camada clicada (ex.: Sistema Viário, Zoneamento, APP) */}
+      <div className="rounded-xl border border-sky-200 bg-sky-50/80 p-3">
+        <div className="flex items-center gap-1.5 text-[11px] font-bold text-sky-900">
+          <BookOpen className="h-3.5 w-3.5 text-sky-700" />
+          O que é: {expCamada.tituloCurto}?
+        </div>
+        <p className="mt-1 leading-relaxed text-slate-700">{expCamada.oQueE}</p>
+        <p className="mt-1 text-[11px] text-slate-600">
+          <strong>Para que serve:</strong> {expCamada.paraQueServe}
+        </p>
+      </div>
+
       {/* Cabeçalho da zona preservando nome/código original */}
       <div className="rounded-xl border border-slate-200 bg-slate-900 p-3.5 text-white">
         <div className="flex flex-wrap items-center justify-between gap-2">

@@ -27,6 +27,7 @@ import type {
   MunicipioResumo,
 } from '../types/domain';
 import { formatSituacaoBadge } from '../utils/format';
+import { obterExplicacaoCamada } from '../utils/layerExplainer';
 import { DocumentViewer } from '../visualizador-pdf/DocumentViewer';
 import { PlanoDiretorGuideModal } from './PlanoDiretorGuideModal';
 import { ZoneInspector } from './ZoneInspector';
@@ -80,6 +81,11 @@ export function GeoportalShell({
 
   // Interpretação e IA
   const [feicaoSelecionada, setFeicaoSelecionada] = useState<FeicaoSelecionada | null>(null);
+  const [expandedInfoLayerId, setExpandedInfoLayerId] = useState<string | null>(null);
+  const [cardCamadaAtivaNome, setCardCamadaAtivaNome] = useState<{
+    nome: string;
+    categoria: string;
+  } | null>(null);
   const [pendingAI, setPendingAI] = useState<{
     pergunta: string;
     zonaSigla?: string;
@@ -109,6 +115,7 @@ export function GeoportalShell({
         setCamadasAtivas({ [primeira.id]: true });
         setCamadasOpacidade({ [primeira.id]: 0.72 });
         setCamadasLoading({ [primeira.id]: true });
+        setCardCamadaAtivaNome({ nome: primeira.nome, categoria: primeira.categoria });
         apiClient
           .obterCamadaGeoJSON(codigoIbge, primeira.id)
           .then((payload) => {
@@ -143,6 +150,12 @@ export function GeoportalShell({
   const toggleCamada = async (layerId: string) => {
     const novo = !camadasAtivas[layerId];
     setCamadasAtivas((prev) => ({ ...prev, [layerId]: novo }));
+    if (novo && municipio) {
+      const camObj = municipio.camadas_gis.find((c) => c.id === layerId);
+      if (camObj) {
+        setCardCamadaAtivaNome({ nome: camObj.nome, categoria: camObj.categoria });
+      }
+    }
     if (camadasOpacidade[layerId] === undefined) {
       setCamadasOpacidade((prev) => ({ ...prev, [layerId]: 0.72 }));
     }
@@ -408,18 +421,51 @@ export function GeoportalShell({
 
           {/* Lupa flutuante canto superior esquerdo (Busca Município / UF / Endereço) */}
           {viewMode === 'mapa' && (
-            <div className="absolute top-3 left-3 z-20">
-              <button
-                type="button"
-                onClick={() => setSearchPopoverOpen((v) => !v)}
-                title="Trocar município ou buscar endereço"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-md hover:bg-slate-50"
-              >
-                <Search className="h-4 w-4" />
-              </button>
+            <div className="pointer-events-none absolute top-3 left-3 z-20 flex items-start gap-2.5">
+              <div className="pointer-events-auto">
+                <button
+                  type="button"
+                  onClick={() => setSearchPopoverOpen((v) => !v)}
+                  title="Trocar município ou buscar endereço"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-md hover:bg-slate-50"
+                >
+                  <Search className="h-4 w-4" />
+                </button>
+              </div>
 
-              {searchPopoverOpen && (
-                <div className="mt-2 w-80 rounded-xl border border-slate-200 bg-white p-3.5 text-xs shadow-xl">
+              {/* Card didático ao vivo dentro do mapa explicando o que é a camada ativa */}
+              {cardCamadaAtivaNome && !searchPopoverOpen && (() => {
+                const exp = obterExplicacaoCamada(cardCamadaAtivaNome.nome, cardCamadaAtivaNome.categoria);
+                return (
+                  <div className="pointer-events-auto hidden max-w-md rounded-xl border border-slate-200 bg-white/95 p-3 text-xs shadow-lg backdrop-blur md:block">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-sky-700">
+                          Entendendo esta camada no mapa
+                        </span>
+                        <h4 className="text-xs font-extrabold text-slate-900">{exp.tituloCurto}</h4>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setCardCamadaAtivaNome(null)}
+                        title="Fechar explicação"
+                        className="rounded p-0.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+                      >
+                        <X className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                    <p className="mt-1 text-[11px] leading-relaxed text-slate-700">{exp.oQueE}</p>
+                    <p className="mt-1 rounded bg-sky-50 px-2 py-1 text-[10px] text-sky-900">
+                      <strong>Exemplo prático:</strong> {exp.exemploPratico}
+                    </p>
+                  </div>
+                );
+              })()}
+            </div>
+          )}
+          {viewMode === 'mapa' && searchPopoverOpen && (
+            <div className="absolute top-14 left-3 z-20">
+                <div className="w-80 rounded-xl border border-slate-200 bg-white p-3.5 text-xs shadow-xl">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="font-bold text-slate-900">Trocar Município / Buscar Endereço</span>
                     <button type="button" onClick={() => setSearchPopoverOpen(false)}>
@@ -496,7 +542,6 @@ export function GeoportalShell({
                   </form>
                   {enderecoErro && <p className="mt-1 text-[11px] text-rose-600">{enderecoErro}</p>}
                 </div>
-              )}
             </div>
           )}
 
@@ -760,9 +805,37 @@ export function GeoportalShell({
                                       <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] uppercase text-slate-600">
                                         {cam.tipo_servico}
                                       </span>
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          setExpandedInfoLayerId(
+                                            expandedInfoLayerId === cam.id ? null : cam.id
+                                          );
+                                        }}
+                                        className="ml-auto inline-flex items-center gap-0.5 rounded bg-sky-50 px-1.5 py-0.5 text-[10px] font-bold text-sky-800 hover:bg-sky-100"
+                                      >
+                                        <Info className="h-2.5 w-2.5" />
+                                        O que é?
+                                      </button>
                                     </div>
                                   </div>
                                 </label>
+                                {expandedInfoLayerId === cam.id && (() => {
+                                  const exp = obterExplicacaoCamada(cam.nome, cam.categoria);
+                                  return (
+                                    <div className="mt-2 rounded-lg border border-sky-200 bg-sky-50/70 p-2 text-[11px] text-slate-700">
+                                      <div className="font-bold text-sky-900">{exp.tituloCurto}</div>
+                                      <p className="mt-0.5">{exp.oQueE}</p>
+                                      <p className="mt-1 text-[10px] text-slate-600">
+                                        <strong>Para que serve:</strong> {exp.paraQueServe}
+                                      </p>
+                                      <p className="mt-1 text-[10px] text-sky-900">
+                                        <strong>Na prática:</strong> {exp.exemploPratico}
+                                      </p>
+                                    </div>
+                                  );
+                                })()}
                                 {camadasLoading[cam.id] && (
                                   <p className="mt-1 text-[10px] text-sky-700">Baixando feições...</p>
                                 )}
@@ -846,9 +919,34 @@ export function GeoportalShell({
                                           {payload.total_feicoes}
                                         </span>
                                       )}
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          setExpandedInfoLayerId(
+                                            expandedInfoLayerId === cam.id ? null : cam.id
+                                          );
+                                        }}
+                                        className="ml-auto inline-flex items-center gap-0.5 rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] font-bold text-emerald-800 hover:bg-emerald-100"
+                                      >
+                                        <Info className="h-2.5 w-2.5" />
+                                        O que é?
+                                      </button>
                                     </div>
                                   </div>
                                 </label>
+                                {expandedInfoLayerId === cam.id && (() => {
+                                  const exp = obterExplicacaoCamada(cam.nome, cam.categoria);
+                                  return (
+                                    <div className="mt-2 rounded-lg border border-emerald-200 bg-emerald-50/70 p-2 text-[11px] text-slate-700">
+                                      <div className="font-bold text-emerald-950">{exp.tituloCurto}</div>
+                                      <p className="mt-0.5">{exp.oQueE}</p>
+                                      <p className="mt-1 text-[10px] text-emerald-900">
+                                        <strong>Na prática:</strong> {exp.exemploPratico}
+                                      </p>
+                                    </div>
+                                  );
+                                })()}
                                 {camadasLoading[cam.id] && (
                                   <p className="mt-1 text-[10px] text-emerald-700">Baixando camada ambiental...</p>
                                 )}
