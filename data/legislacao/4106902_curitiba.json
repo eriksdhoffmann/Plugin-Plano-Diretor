@@ -1,0 +1,112 @@
+{
+  "codigo_ibge": "4106902",
+  "municipio": "Curitiba",
+  "uf": "PR",
+  "data_verificacao": "2026-11-24",
+  "url_fonte": "https://ippuc.org.br/planodiretor/",
+  "zonas_conhecidas": [
+    {
+      "sigla": "ZROC",
+      "nome": "Zona Residencial de Ocupação Controlada",
+      "grupo": "ZONAS RESIDENCIAIS",
+      "lei": "Lei Municipal nº 15.511/2019",
+      "artigo": "Disposições de Zonas Residenciais (conferir texto consolidado da Lei nº 15.511/2019)",
+      "finalidade": "Ordenar a ocupação residencial em setores com condicionantes ambientais, topográficas ou de infraestrutura urbana que exigem controle de adensamento e impermeabilização.",
+      "usos_permitidos": "Uso residencial unifamiliar e usos compatíveis previstos na tabela específica da Lei nº 15.511/2019 (requer conferência na Guia Amarela / anexo da lei).",
+      "usos_condicionados": "Usos sujeitos à análise técnica urbanística/ambiental conforme porte e impacto definidos na Lei nº 15.511/2019.",
+      "usos_proibidos": "Atividades incômodas ou incompatíveis com baixa/controlada densidade residencial definidas na tabela da Lei nº 15.511/2019.",
+      "parametros": {},
+      "aviso_parametros": "Os parâmetros numéricos exatos (coeficiente de aproveitamento, taxa de ocupação, taxa de permeabilidade, recuos, altura máxima e lote mínimo) variam por subzona/via e dependem da consulta aos Anexos/Tabelas da Lei nº 15.511/2019 e da Guia Amarela oficial do IPPUC/SMU."
+    },
+    {
+      "sigla": "ZROI",
+      "nome": "Zona Residencial de Ocupação Integrada",
+      "grupo": "ZONAS RESIDENCIAIS",
+      "lei": "Lei Municipal nº 15.511/2019",
+      "artigo": "Disposições de Zonas Residenciais (Lei nº 15.511/2019)",
+      "finalidade": "Promover ocupação residencial integrada à malha urbana consolidada com compatibilização de infraestrutura e serviços locais.",
+      "usos_permitidos": "Uso residencial e usos vicinais previstos nos anexos da Lei nº 15.511/2019.",
+      "usos_condicionados": "Usos comerciais ou de serviços sujeitos a porte e porte viário conforme Lei nº 15.511/2019.",
+      "usos_proibidos": "Atividades de alto impacto ou incompatíveis listadas nos anexos da Lei nº 15.511/2019.",
+      "parametros": {},
+      "aviso_parametros": "Consultar tabela anexa da Lei nº 15.511/2019 e Guia Amarela do lote para coeficientes e recuos exatos."
+    },
+    {
+      "sigla": "ZR1",
+      "nome": "Zona Residencial 1",
+      "grupo": "ZONAS RESIDENCIAIS",
+      "lei": "Lei Municipal nº 15.511/2019",
+      "artigo": "Disposições de Zonas Residenciais (Lei nº 15.511/2019)",
+      "finalidade": "Setor predominantemente residencial de baixa densidade.",
+      "usos_permitidos": "Habitação unifamiliar e usos expressamente listados na tabela de parâmetros da Lei nº 15.511/2019.",
+      "usos_condicionados": "Dependentes de anuência/análise conforme tabela da Lei nº 15.511/2019.",
+      "usos_proibidos": "Usos industriais e comerciais de médio/grande porte incompatíveis conforme Lei nº 15.511/2019.",
+      "parametros": {},
+      "aviso_parametros": "Consultar tabela oficial anexa à Lei nº 15.511/2019 para os índices exatos."
+    },
+    {
+      "sigla": "ZI",
+      "nome": "Zona Industrial",
+      "grupo": "ZONAS DE USO PREDOMINANTEMENTE PRODUTIVO / INDUSTRIAL",
+      "lei": "Lei Municipal nº 15.511/2019",
+      "artigo": "Disposições sobre Zonas Industriais (Lei nº 15.511/2019)",
+      "finalidade": "Destinar áreas com infraestrutura logística e compatibilidade territorial para atividades industriais, logísticas e produtivas, reduzindo conflitos com áreas estritamente residenciais.",
+      "usos_permitidos": "Atividades industriais, logísticas e de apoio produtivo enquadradas na categoria da zona conforme Lei nº 15.511/2019.",
+      "usos_condicionados": "Atividades com exigência de licenciamento ambiental, Estudo de Impacto de Vizinhança (EIV) ou análise do Conselho Municipal de Urbanismo.",
+      "usos_proibidos": "Usos incompatíveis com a segurança e destinação industrial, incluindo restrições à implantação residencial conforme tabela da Lei nº 15.511/2019.",
+      "parametros": {},
+      "aviso_parametros": "Verifique a tabela anexa da Lei nº 15.511/2019 e eventuais sobreposições ambientais/viárias na Guia Amarela."
+    },
+    {
+      "sigla": "APA",
+      "nome": "Área de Proteção Ambiental (Unidade de Conservação Municipal)",
+      "grupo": "SISTEMA MUNICIPAL DE UNIDADES DE CONSERVAÇÃO (SEUC)",
+      "lei": "Lei Municipal nº 15.511/2019 e Lei Federal nº 9.985/2000",
+      "artigo": "Regime do SEUC / Decreto de criação da APA",
+      "finalidade": "Conciliar a conservação da diversidade biológica, dos recursos hídricos e da paisagem com a ocupação humana disciplinada por Plano de Manejo específico.",
+      "usos_permitidos": "Definidos pelo Plano de Manejo da respectiva APA e pela legislação urbanística municipal incidente.",
+      "usos_condicionados": "Parcelamentos e edificações sujeitos a diretrizes ambientais da Secretaria Municipal do Meio Ambiente (SMMA) e do Plano de Manejo.",
+      "usos_proibidos": "Atividades degradadoras vedadas pelo decreto de instituição da APA e legislação ambiental.",
+      "parametros": {},
+      "aviso_parametros": "APA é Unidade de Conservação de Uso Sustentável (Lei 9.985/2000), distinta de APP do Código Florestal — ambas podem coexistir no mesmo imóvel."
+    }
+  ],
+  "dispositivos": [
+    {
+      "id": "cwb_pd_objetivo",
+      "lei": "Lei Municipal nº 14.771/2015",
+      "artigo": "Plano Diretor de Curitiba (Disposições Gerais)",
+      "anexo": null,
+      "pagina": null,
+      "titulo": "Função ordenadora do Plano Diretor de Curitiba",
+      "texto_literal": "A Lei Municipal nº 14.771, de 17 de dezembro de 2015, aprova a revisão do Plano Diretor de Curitiba, orientando os agentes públicos e privados no desenvolvimento integrado, harmônico e sustentável do município em articulação com a Região Metropolitana e vinculando o PPA, a LDO e a LOA às suas diretrizes.",
+      "palavras_chave": ["curitiba", "plano diretor", "14771", "objetivo", "ppa", "ldo", "loa", "diretrizes"],
+      "url": "https://ippuc.org.br/planodiretor/",
+      "confianca": 0.95
+    },
+    {
+      "id": "cwb_luos_15511",
+      "lei": "Lei Municipal nº 15.511/2019",
+      "artigo": "Zoneamento, Uso e Ocupação do Solo",
+      "anexo": "Mapa de Zoneamento (GeoCuritiba Layer 36)",
+      "pagina": null,
+      "titulo": "Integração entre o Plano Diretor e o Zoneamento de Curitiba",
+      "texto_literal": "A Lei Municipal nº 15.511/2019 estabelece as diretrizes e critérios de zoneamento, uso e ocupação do solo no Município de Curitiba em consonância com o Plano Diretor (Lei nº 14.771/2015), definindo zonas residenciais, comerciais, de serviços, industriais, eixos estruturantes, áreas especiais e zonas de proteção ambiental.",
+      "palavras_chave": ["curitiba", "zoneamento", "15511", "uso e ocupacao", "zroc", "zroi", "zr1", "zi", "construir"],
+      "url": "https://geocuritiba.ippuc.org.br/server/rest/services/GeoCuritiba/Publico_GeoCuritiba_MapaCadastral/MapServer/36",
+      "confianca": 0.95
+    },
+    {
+      "id": "cwb_seuc_parques",
+      "lei": "Sistema Municipal de Unidades de Conservação (SEUC)",
+      "artigo": "Unidades de Conservação Municipais",
+      "anexo": "FeatureServer SEUC (GeoCuritiba)",
+      "pagina": null,
+      "titulo": "Parques Naturais Municipais, Bosques e APAs em Curitiba",
+      "texto_literal": "O Sistema Municipal de Unidades de Conservação (SEUC) de Curitiba compreende Estações Ecológicas, Parques Naturais Municipais, Parques Lineares, Bosques Municipais, Refúgios de Vida Silvestre, RPPNs, APAs e ARIEs, publicados oficialmente pelo IPPUC no GeoCuritiba.",
+      "palavras_chave": ["curitiba", "unidade de conservacao", "seuc", "apa", "parque", "preservacao", "ambiental", "app"],
+      "url": "https://geocuritiba.ippuc.org.br/server/rest/services/GeoCuritiba/Publico_Sistema_Municipal_de_Unidades_de_Conservacao/FeatureServer",
+      "confianca": 0.95
+    }
+  ]
+}

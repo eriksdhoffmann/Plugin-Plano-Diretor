@@ -1,0 +1,86 @@
+{
+  "escopo": "federal",
+  "lei": "Lei Federal nº 12.651/2012 (Código Florestal) e Lei Federal nº 9.985/2000 (SNUC)",
+  "data_verificacao": "2026-11-24",
+  "url_oficial": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12651.htm",
+  "distincao_conceitual": {
+    "app": {
+      "nome": "Área de Preservação Permanente (APP)",
+      "fundamentacao": "Lei Federal nº 12.651/2012, Art. 3º, inciso II e Art. 4º",
+      "definicao": "Área protegida, coberta ou não por vegetação nativa, com a função ambiental de preservar os recursos hídricos, a paisagem, a estabilidade geológica e a biodiversidade, facilitar o fluxo gênico de fauna e flora, proteger o solo e assegurar o bem-estar das populações humanas.",
+      "criterios": [
+        "Faixas marginais de qualquer curso d'água natural perene e intermitente (30m a 500m conforme largura do curso d'água, Art. 4º, I)",
+        "Entorno de lagos e lagoas naturais (Art. 4º, II) e reservatórios artificiais (Art. 4º, III)",
+        "Entorno de nascentes e olhos d'água perenes, raio mínimo de 50m (Art. 4º, IV)",
+        "Encostas com declividade superior a 45° (Art. 4º, V)",
+        "Restingas fixadoras de dunas ou estabilizadoras de mangues (Art. 4º, VI)",
+        "Manguezais em toda a sua extensão (Art. 4º, VII)",
+        "Bordas de tabuleiros ou chapadas (Art. 4º, VIII) e topo de morros/montes/serras conforme critérios do Art. 4º, IX"
+      ],
+      "excecoes_hipoteses": "A intervenção ou supressão de vegetação nativa em APP somente ocorre nas hipóteses de utilidade pública, de interesse social ou de baixo impacto ambiental previstas na Lei Federal nº 12.651/2012 (Art. 8º), além de regimes específicos para áreas urbanas consolidadas (Art. 4º, § 10 e Lei nº 14.285/2021 mediante diagnóstico socioambiental e lei municipal específica)."
+    },
+    "zona_preservacao_municipal": {
+      "nome": "Zona de Preservação / Proteção Ambiental Municipal",
+      "fundamentacao": "Plano Diretor e Lei de Uso e Ocupação do Solo do Município",
+      "definicao": "Classe de zoneamento urbanístico-territorial definida por lei municipal (ex.: ZPA, AUAP, Setor de Preservação), com parâmetros urbanísticos locais específicos. Pode abranger APPs, mas não se confunde juridicamente com APP federal."
+    },
+    "unidade_conservacao": {
+      "nome": "Unidade de Conservação (UC)",
+      "fundamentacao": "Lei Federal nº 9.985/2000 (SNUC)",
+      "definicao": "Espaço territorial e seus recursos ambientais legalmente instituído pelo Poder Público (federal, estadual ou municipal), dividido em Proteção Integral (Estação Ecológica, Parque Natural, etc.) e Uso Sustentável (APA, ARIE, RPPN, etc.), com plano de manejo específico."
+    },
+    "area_verde": {
+      "nome": "Área Verde / Lazer Urbano",
+      "fundamentacao": "Legislação municipal de parcelamento do solo e Lei Federal nº 12.651/2012, Art. 3º, inciso XX",
+      "definicao": "Espaço de domínio público que desempenha função ecológica, paisagística e recreativa em áreas urbanas."
+    },
+    "restricao_urbanistica": {
+      "nome": "Zona ou Faixa de Restrição Urbanística",
+      "fundamentacao": "Plano Diretor / Lei de Ordenamento Territorial municipal",
+      "definicao": "Limitação administrativa municipal à ocupação ou ao potencial construtivo (ex.: faixas não edificáveis, restrições aeroportuárias, cotas topográficas como a Cota 40)."
+    },
+    "area_risco": {
+      "nome": "Área de Risco Geológico-Geotécnico ou Hidrológico",
+      "fundamentacao": "Lei Federal nº 12.608/2012 e Lei nº 6.766/1979 (Art. 3º, parágrafo único)",
+      "definicao": "Trecho sujeito a deslizamentos, inundações, erosão ou solapamento, identificado por mapeamento geotécnico/Defesa Civil/CPRM, onde a edificação pode ser vedada ou condicionada a obras de estabilização."
+    }
+  },
+  "dispositivos": [
+    {
+      "id": "cf_art3_ii",
+      "lei": "Lei Federal nº 12.651/2012",
+      "artigo": "Art. 3º, inciso II",
+      "anexo": null,
+      "pagina": null,
+      "titulo": "Conceito legal de Área de Preservação Permanente (APP)",
+      "texto_literal": "Área de Preservação Permanente - APP: área protegida, coberta ou não por vegetação nativa, com a função ambiental de preservar os recursos hídricos, a paisagem, a estabilidade geológica e a biodiversidade, facilitar o fluxo gênico de fauna e flora, proteger o solo e assegurar o bem-estar das populações humanas.",
+      "palavras_chave": ["app", "preservacao permanente", "recursos hidricos", "funcao ambiental", "codigo florestal"],
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12651.htm",
+      "confianca": 1.0
+    },
+    {
+      "id": "cf_art4",
+      "lei": "Lei Federal nº 12.651/2012",
+      "artigo": "Art. 4º",
+      "anexo": null,
+      "pagina": null,
+      "titulo": "Critérios de enquadramento de APPs em zonas rurais ou urbanas",
+      "texto_literal": "Considera-se Área de Preservação Permanente, em zonas rurais ou urbanas, para os efeitos desta Lei: faixas marginais de cursos d'água naturais, entorno de lagos, lagoas, reservatórios d'água artificiais, nascentes e olhos d'água perenes (raio mínimo de 50 metros), encostas com declividade superior a 45 graus, restingas, manguezais, bordas de tabuleiros ou chapadas e topos de morros conforme os incisos I a XI.",
+      "palavras_chave": ["app", "margem", "rio", "curso dagua", "nascente", "encosta", "declividade", "manguezal", "restinga"],
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12651.htm",
+      "confianca": 1.0
+    },
+    {
+      "id": "cf_art7_8",
+      "lei": "Lei Federal nº 12.651/2012",
+      "artigo": "Arts. 7º e 8º",
+      "anexo": null,
+      "pagina": null,
+      "titulo": "Regime de proteção e hipóteses excepcionais de intervenção em APP",
+      "texto_literal": "A vegetação situada em Área de Preservação Permanente deverá ser mantida pelo proprietário da área, possuidor ou ocupante a qualquer título (Art. 7º). A intervenção ou a supressão de vegetação nativa em APP somente ocorrerá nas hipóteses de utilidade pública, de interesse social ou de baixo impacto ambiental previstas nesta Lei (Art. 8º).",
+      "palavras_chave": ["app", "construir", "intervencao", "supressao", "utilidade publica", "interesse social", "baixo impacto", "restricao"],
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12651.htm",
+      "confianca": 1.0
+    }
+  ]
+}

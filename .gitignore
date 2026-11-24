@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / WebGIS
+apps/webgis/node_modules/
+apps/webgis/dist/
+*.tsbuildinfo
+
+# Local databases & caches (gerados em runtime)
+data/catalogo/*.db
+data/catalogo/*.sqlite
+data/mapas/cache/
+data/planos_diretores/downloads/
+.planos_diretores_cache/
+
+# Packaging artifacts
+dist/*.zip
+
+# Env & secrets
+.env
+.env.local
+*.pem
+*.key
+
+# IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

@@ -1,0 +1,328 @@
+{
+  "versao": "1.0.0",
+  "data_atualizacao": "2026-11-24",
+  "politica": {
+    "nao_inventar": true,
+    "mensagem_nao_localizado": "Plano Diretor não localizado nas fontes consultadas.",
+    "hierarquia_fontes": [
+      "Prefeitura Municipal / Instituto Municipal de Planejamento",
+      "Câmara Municipal",
+      "Diário Oficial",
+      "Portal Municipal de Legislação",
+      "Órgão Estadual",
+      "Repositório Oficial Federal",
+      "Repositório Acadêmico / Institucional"
+    ]
+  },
+  "planos_diretores": [
+    {
+      "codigo_ibge": "4106902",
+      "municipio": "Curitiba",
+      "uf": "PR",
+      "nome_plano_diretor": "Plano Diretor de Curitiba (Revisão 2015)",
+      "lei_principal": "Lei Municipal nº 14.771/2015",
+      "ano_lei": 2015,
+      "data_aprovacao": "2015-12-17",
+      "data_revisao": "2025",
+      "situacao": "vigente",
+      "fonte_oficial": "Prefeitura Municipal de Curitiba / IPPUC (Instituto de Pesquisa e Planejamento Urbano de Curitiba)",
+      "hierarquia_fonte": 1,
+      "url_oficial": "https://ippuc.org.br/planodiretor/",
+      "url_pdf": null,
+      "confiabilidade": "alta",
+      "data_verificacao": "2026-11-24",
+      "aviso_documental": "A Lei Municipal nº 14.771/2015 institui o Plano Diretor e a Lei Municipal nº 15.511/2019 consolida o Zoneamento, Uso e Ocupação do Solo. Consulte a Guia Amarela oficial da Prefeitura para parâmetros específicos por lote.",
+      "documentos": [
+        {
+          "titulo": "Plano Diretor de Curitiba — Lei Municipal nº 14.771/2015 (Portal IPPUC)",
+          "tipo": "plano_diretor",
+          "lei_numero": "Lei Municipal nº 14.771/2015",
+          "ano": 2015,
+          "url": "https://ippuc.org.br/planodiretor/",
+          "formato": "HTML/Portal Oficial",
+          "fonte_oficial": "IPPUC / Prefeitura de Curitiba",
+          "hierarquia_fonte": 1,
+          "situacao_vigencia": "vigente",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Portal institucional oficial com histórico, revisões e documentação do Plano Diretor."
+        },
+        {
+          "titulo": "Lei de Zoneamento, Uso e Ocupação do Solo — Lei Municipal nº 15.511/2019",
+          "tipo": "legislacao_complementar",
+          "lei_numero": "Lei Municipal nº 15.511/2019",
+          "ano": 2019,
+          "url": "https://www.ippuc.org.br/",
+          "formato": "Portal Oficial",
+          "fonte_oficial": "IPPUC / Prefeitura de Curitiba",
+          "hierarquia_fonte": 1,
+          "situacao_vigencia": "vigente",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Regulamenta zonas, siglas e parâmetros de uso e ocupação do solo derivados do Plano Diretor."
+        },
+        {
+          "titulo": "Portal Geoespacial GeoCuritiba (IPPUC)",
+          "tipo": "anexo_cartografico",
+          "lei_numero": "Lei Municipal nº 15.511/2019",
+          "ano": 2019,
+          "url": "https://geocuritiba.ippuc.org.br/",
+          "formato": "WebGIS / ArcGIS REST",
+          "fonte_oficial": "IPPUC / GeoCuritiba",
+          "hierarquia_fonte": 1,
+          "situacao_vigencia": "vigente",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Base cartográfica oficial com serviços REST verificados."
+        }
+      ],
+      "camadas_gis": [
+        {
+          "id": "curitiba_zoneamento_15511",
+          "nome": "Zoneamento Urbano (Lei nº 15.511/2019)",
+          "categoria": "urbanistica",
+          "tipo_servico": "arcgis_rest",
+          "url": "https://geocuritiba.ippuc.org.br/server/rest/services/GeoCuritiba/Publico_GeoCuritiba_MapaCadastral/MapServer/36",
+          "campo_codigo_zona": "sg_zona",
+          "campo_nome_zona": "nm_zona",
+          "campo_grupo": "nm_grupo",
+          "campo_legislacao": "legislacao",
+          "campo_area": "st_area(shape)",
+          "crs_origem": "SIRGAS 2000 / UTM 22S (reprojetado para EPSG:4326 na API)",
+          "origem_geometria": "oficial",
+          "fonte_oficial": "IPPUC / GeoCuritiba — MapaCadastral Layer 36",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Camada oficial verificada via API REST em 24/11/2026."
+        },
+        {
+          "id": "curitiba_uc_parques",
+          "nome": "Unidades de Conservação — Parques Naturais Municipais (SEUC)",
+          "categoria": "ambiental",
+          "tipo_servico": "arcgis_rest",
+          "url": "https://geocuritiba.ippuc.org.br/server/rest/services/GeoCuritiba/Publico_Sistema_Municipal_de_Unidades_de_Conservacao/FeatureServer/2",
+          "campo_codigo_zona": "categoria",
+          "campo_nome_zona": "nome",
+          "campo_grupo": "grupo",
+          "campo_legislacao": "decreto",
+          "campo_area": null,
+          "crs_origem": "SIRGAS 2000 (reprojetado para EPSG:4326 na API)",
+          "origem_geometria": "oficial",
+          "fonte_oficial": "IPPUC / GeoCuritiba — SEUC FeatureServer/2",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Unidades de Conservação do Sistema Municipal (não confundir com APP do Código Florestal)."
+        },
+        {
+          "id": "curitiba_uc_apas",
+          "nome": "Unidades de Conservação — Áreas de Proteção Ambiental (APA)",
+          "categoria": "ambiental",
+          "tipo_servico": "arcgis_rest",
+          "url": "https://geocuritiba.ippuc.org.br/server/rest/services/GeoCuritiba/Publico_Sistema_Municipal_de_Unidades_de_Conservacao/FeatureServer/10",
+          "campo_codigo_zona": "categoria",
+          "campo_nome_zona": "nome",
+          "campo_grupo": "grupo",
+          "campo_legislacao": "decreto",
+          "campo_area": null,
+          "crs_origem": "SIRGAS 2000 (reprojetado para EPSG:4326 na API)",
+          "origem_geometria": "oficial",
+          "fonte_oficial": "IPPUC / GeoCuritiba — SEUC FeatureServer/10",
+          "data_verificacao": "2026-11-24",
+          "observacao": "APAs municipais integrantes do SNUC/SEUC."
+        }
+      ],
+      "historico_versoes": [
+        {
+          "lei": "Lei Municipal nº 11.266/2004",
+          "ano": 2004,
+          "situacao": "substituida",
+          "observacao": "Plano Diretor anterior, substituído pela Lei nº 14.771/2015."
+        },
+        {
+          "lei": "Lei Municipal nº 14.771/2015",
+          "ano": 2015,
+          "situacao": "vigente",
+          "observacao": "Revisão vigente do Plano Diretor de Curitiba."
+        }
+      ]
+    },
+    {
+      "codigo_ibge": "4209102",
+      "municipio": "Joinville",
+      "uf": "SC",
+      "nome_plano_diretor": "Plano Diretor de Desenvolvimento Sustentável — PDDS de Joinville",
+      "lei_principal": "Lei Complementar nº 620/2022",
+      "ano_lei": 2022,
+      "data_aprovacao": "2022-09-12",
+      "data_revisao": "2022-09-12",
+      "situacao": "vigente",
+      "fonte_oficial": "Prefeitura Municipal de Joinville / SEPUR / SIMGeo",
+      "hierarquia_fonte": 1,
+      "url_oficial": "https://www.joinville.sc.gov.br/",
+      "url_pdf": null,
+      "confiabilidade": "alta",
+      "data_verificacao": "2026-11-24",
+      "aviso_documental": "O PDDS (LC nº 620/2022) opera em conjunto com a Lei de Ordenamento Territorial (LC nº 470/2017 e atualizações) e com o Plano Viário (LC nº 694/2024). Verifique eventuais alterações posteriores na Consulta de Viabilidade oficial do SIMGeo.",
+      "documentos": [
+        {
+          "titulo": "Plano Diretor de Desenvolvimento Sustentável — LC nº 620/2022",
+          "tipo": "plano_diretor",
+          "lei_numero": "Lei Complementar nº 620/2022",
+          "ano": 2022,
+          "url": "https://www.joinville.sc.gov.br/",
+          "formato": "Portal Oficial",
+          "fonte_oficial": "Prefeitura de Joinville",
+          "hierarquia_fonte": 1,
+          "situacao_vigencia": "vigente",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Institui o Plano Diretor de Desenvolvimento Sustentável do Município de Joinville."
+        },
+        {
+          "titulo": "Lei de Ordenamento Territorial (LOT) — LC nº 470/2017",
+          "tipo": "legislacao_complementar",
+          "lei_numero": "Lei Complementar nº 470/2017",
+          "ano": 2017,
+          "url": "https://www.joinville.sc.gov.br/",
+          "formato": "Portal Oficial",
+          "fonte_oficial": "Prefeitura de Joinville",
+          "hierarquia_fonte": 1,
+          "situacao_vigencia": "vigente",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Disciplina zoneamento, uso e ocupação do solo, índices urbanísticos e instrumentos de controle."
+        },
+        {
+          "titulo": "Plano Viário de Joinville — LC nº 694/2024",
+          "tipo": "legislacao_complementar",
+          "lei_numero": "Lei Complementar nº 694/2024",
+          "ano": 2024,
+          "url": "https://www.joinville.sc.gov.br/",
+          "formato": "Portal Oficial",
+          "fonte_oficial": "Prefeitura de Joinville",
+          "hierarquia_fonte": 1,
+          "situacao_vigencia": "vigente",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Hierarquia viária complementar ao PDDS e à LOT."
+        },
+        {
+          "titulo": "Portal SIMGeo — Sistema de Informações Municipais Georreferenciadas",
+          "tipo": "anexo_cartografico",
+          "lei_numero": "LC nº 620/2022 e LC nº 470/2017",
+          "ano": 2025,
+          "url": "https://geo.joinville.sc.gov.br/",
+          "formato": "WebGIS / ArcGIS REST",
+          "fonte_oficial": "Prefeitura de Joinville — SIMGeo",
+          "hierarquia_fonte": 1,
+          "situacao_vigencia": "vigente",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Portal cartográfico oficial de consulta georreferenciada."
+        }
+      ],
+      "camadas_gis": [
+        {
+          "id": "joinville_zoneamento_2025",
+          "nome": "Zoneamento Urbano e Rural (SIMGeo 2025)",
+          "categoria": "urbanistica",
+          "tipo_servico": "arcgis_rest",
+          "url": "https://geo.joinville.sc.gov.br/server/rest/services/Zoneamento_2025/MapServer/0",
+          "campo_codigo_zona": "sigla_z",
+          "campo_nome_zona": "legenda_m",
+          "campo_grupo": "legenda_m",
+          "campo_legislacao": null,
+          "campo_area": "st_area(shape)",
+          "crs_origem": "SIRGAS 2000 / UTM 22S (reprojetado para EPSG:4326 na API)",
+          "origem_geometria": "oficial",
+          "fonte_oficial": "Prefeitura de Joinville / SIMGeo — Zoneamento_2025/MapServer/0",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Camada oficial verificada via ArcGIS REST em 24/11/2026."
+        },
+        {
+          "id": "joinville_cota_40",
+          "nome": "Restrição Topográfica e Ambiental — Cota 40",
+          "categoria": "ambiental",
+          "tipo_servico": "arcgis_rest",
+          "url": "https://geo.joinville.sc.gov.br/server/rest/services/Cota_40/MapServer/0",
+          "campo_codigo_zona": null,
+          "campo_nome_zona": null,
+          "campo_grupo": "Cota 40",
+          "campo_legislacao": "LC nº 470/2017",
+          "campo_area": "st_area(shape)",
+          "crs_origem": "SIRGAS 2000 (reprojetado para EPSG:4326 na API)",
+          "origem_geometria": "oficial",
+          "fonte_oficial": "Prefeitura de Joinville / SIMGeo — Cota_40/MapServer/0",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Camada de restrição altimétrica/ambiental municipal (não confundir com APP federal)."
+        }
+      ],
+      "historico_versoes": [
+        {
+          "lei": "Lei Complementar nº 261/2008",
+          "ano": 2008,
+          "situacao": "substituida",
+          "observacao": "Plano Diretor anterior, substituído pelo PDDS de 2022."
+        },
+        {
+          "lei": "Lei Complementar nº 620/2022",
+          "ano": 2022,
+          "situacao": "vigente",
+          "observacao": "Plano Diretor de Desenvolvimento Sustentável vigente."
+        }
+      ]
+    },
+    {
+      "codigo_ibge": "4201307",
+      "municipio": "Araquari",
+      "uf": "SC",
+      "nome_plano_diretor": "Plano Diretor Participativo do Município de Araquari",
+      "lei_principal": "Lei Complementar nº 281/2019",
+      "ano_lei": 2019,
+      "data_aprovacao": "2019",
+      "data_revisao": null,
+      "situacao": "localizado_em_verificacao",
+      "fonte_oficial": "Portal Municipal de Legislação (Leis Municipais) / Referência Prefeitura de Araquari",
+      "hierarquia_fonte": 4,
+      "url_oficial": "https://leismunicipais.com.br/a1/plano-diretor-araquari-sc",
+      "url_pdf": null,
+      "confiabilidade": "media",
+      "data_verificacao": "2026-11-24",
+      "aviso_documental": "A Lei Complementar nº 281/2019 foi identificada como o Plano Diretor Participativo (substituindo a LC nº 50/2006). Entretanto, o portal direto araquari.sc.gov.br retornou indisponibilidade HTTP 502 na verificação de 24/11/2026 e ainda não há camada vetorial oficial indexada neste catálogo. Confirme eventuais alterações recentes diretamente junto à Prefeitura ou Câmara Municipal.",
+      "documentos": [
+        {
+          "titulo": "Plano Diretor Participativo de Araquari — LC nº 281/2019 (Portal Leis Municipais)",
+          "tipo": "plano_diretor",
+          "lei_numero": "Lei Complementar nº 281/2019",
+          "ano": 2019,
+          "url": "https://leismunicipais.com.br/a1/plano-diretor-araquari-sc",
+          "formato": "HTML",
+          "fonte_oficial": "Leis Municipais (Portal de Legislação Municipal)",
+          "hierarquia_fonte": 4,
+          "situacao_vigencia": "aguardando_verificacao",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Texto consolidado indexado em repositório de legislação municipal; PDF oficial e anexos cartográficos pendentes de obtenção na Prefeitura."
+        },
+        {
+          "titulo": "Portal Oficial da Prefeitura de Araquari",
+          "tipo": "fonte_institucional",
+          "lei_numero": null,
+          "ano": null,
+          "url": "https://araquari.sc.gov.br/",
+          "formato": "Portal Oficial",
+          "fonte_oficial": "Prefeitura Municipal de Araquari",
+          "hierarquia_fonte": 1,
+          "situacao_vigencia": "aguardando_verificacao",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Retornou HTTP 502 Bad Gateway durante a auditoria automática em 24/11/2026."
+        }
+      ],
+      "camadas_gis": [],
+      "historico_versoes": [
+        {
+          "lei": "Lei Complementar nº 50/2006",
+          "ano": 2006,
+          "situacao": "substituida",
+          "observacao": "Primeiro Plano Diretor Participativo de Araquari, substituído pela LC nº 281/2019."
+        },
+        {
+          "lei": "Lei Complementar nº 281/2019",
+          "ano": 2019,
+          "situacao": "aguardando_verificacao",
+          "observacao": "Plano Diretor Participativo localizado; aguardando confirmação de anexos e vigência consolidada no portal oficial da Prefeitura."
+        }
+      ]
+    }
+  ]
+}

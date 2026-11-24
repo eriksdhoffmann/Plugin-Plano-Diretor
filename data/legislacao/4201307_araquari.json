@@ -1,0 +1,22 @@
+{
+  "codigo_ibge": "4201307",
+  "municipio": "Araquari",
+  "uf": "SC",
+  "data_verificacao": "2026-11-24",
+  "url_fonte": "https://leismunicipais.com.br/a1/plano-diretor-araquari-sc",
+  "zonas_conhecidas": [],
+  "dispositivos": [
+    {
+      "id": "arq_pd_281",
+      "lei": "Lei Complementar nº 281/2019",
+      "artigo": "Plano Diretor Participativo de Araquari (Referência identificada)",
+      "anexo": null,
+      "pagina": null,
+      "titulo": "Marco legal identificado do Plano Diretor de Araquari",
+      "texto_literal": "A Lei Complementar nº 281/2019 institui o Plano Diretor Participativo do Município de Araquari (SC), sucedendo a Lei Complementar nº 50/2006. O texto integral em PDF oficial da Prefeitura e os arquivos vetoriais de zoneamento ainda não foram validados nesta base devido à indisponibilidade temporária do portal araquari.sc.gov.br (HTTP 502 em 24/11/2026).",
+      "palavras_chave": ["araquari", "plano diretor", "281", "50", "zoneamento", "legislacao"],
+      "url": "https://leismunicipais.com.br/a1/plano-diretor-araquari-sc",
+      "confianca": 0.75
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+[general]
+name=Planos Diretores do Brasil — QGIS
+qgisMinimumVersion=3.28
+qgisMaximumVersion=4.99
+supportsQt6=True
+description=Consulte o Catálogo Nacional de Planos Diretores Municipais (5.571 municípios IBGE), abra legislações oficiais e carregue camadas de zoneamento diretamente no QGIS.
+about=Plugin técnico e operacional do Projeto Nacional Planos Diretores do Brasil.
+ Conecta o QGIS diretamente à infraestrutura nacional unificada de Planos Diretores,
+ permitindo selecionar UF e Município (código IBGE de 7 dígitos), consultar situação
+ documental e fonte oficial, abrir textos legais, baixar anexos e carregar camadas
+ vetoriais/OGC/REST (GeoPackage, Shapefile, GeoJSON, WMS, WFS, WMTS e ArcGIS REST)
+ com zoom automático, legenda por zonas locais e cache persistente offline.
+version=1.0.0
+author=Erik S. D. Hoffmann
+email=contato@planosdiretoresbrasil.org
+homepage=https://github.com/eriksdhoffmann/Plugin-Plano-Diretor
+tracker=https://github.com/eriksdhoffmann/Plugin-Plano-Diretor/issues
+repository=https://github.com/eriksdhoffmann/Plugin-Plano-Diretor
+category=Vector
+tags=plano diretor,zoneamento,urbanismo,ibge,brasil,legislacao,wfs,wms,arcgis
+icon=icon.svg
+experimental=False
+deprecated=False
+changelog=1.0.0 - Lançamento inicial compatível com QGIS 3 (Qt5) e QGIS 4 (Qt6), integrado à API unificada e com cache local offline.

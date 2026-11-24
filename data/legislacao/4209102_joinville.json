@@ -1,0 +1,86 @@
+{
+  "codigo_ibge": "4209102",
+  "municipio": "Joinville",
+  "uf": "SC",
+  "data_verificacao": "2026-11-24",
+  "url_fonte": "https://www.joinville.sc.gov.br/",
+  "zonas_conhecidas": [
+    {
+      "sigla": "AUAP",
+      "nome": "Área Urbana de Adensamento Prioritário",
+      "grupo": "MACROZONEAMENTO / LOT",
+      "lei": "Lei Complementar nº 470/2017 e LC nº 620/2022",
+      "artigo": "Disposições de Macrozoneamento Urbano e Zoneamento (LOT LC nº 470/2017)",
+      "finalidade": "Direcionar o adensamento urbano para porções do território já dotadas de infraestrutura viária, transporte coletivo, saneamento e equipamentos públicos.",
+      "usos_permitidos": "Definidos por setor (SA) sobreposto na tabela de usos da Lei de Ordenamento Territorial (LC nº 470/2017).",
+      "usos_condicionados": "Sujeitos ao atendimento de Estudo de Impacto de Vizinhança (EIV) e parâmetros do setor aplicável na LC nº 470/2017.",
+      "usos_proibidos": "Atividades incompatíveis com o setor urbano correspondente na LC nº 470/2017.",
+      "parametros": {},
+      "aviso_parametros": "Em Joinville, o zoneamento combina a macrozona/área (ex.: AUAP, AUPA) com o setor específico (ex.: SA-02). Confira a Consulta de Viabilidade no SIMGeo para os índices do imóvel."
+    },
+    {
+      "sigla": "AUPA",
+      "nome": "Área Urbana de Proteção Ambiental",
+      "grupo": "MACROZONEAMENTO AMBIENTAL / LOT",
+      "lei": "Lei Complementar nº 470/2017 e LC nº 620/2022",
+      "artigo": "Disposições sobre Áreas de Proteção Ambiental Urbana (LC nº 470/2017)",
+      "finalidade": "Proteger remanescentes ambientais, áreas frágeis, várzeas, mananciais e encostas inseridas no perímetro urbano de Joinville.",
+      "usos_permitidos": "Usos estritamente compatíveis com a conservação ambiental previstos na LC nº 470/2017.",
+      "usos_condicionados": "Eventuais ocupações excepcionais sujeitas a licenciamento ambiental (SAMA) e critérios restritivos da LOT.",
+      "usos_proibidos": "Parcelamentos e usos de alto impacto ou supressão não autorizada vedados pela LOT e legislação ambiental.",
+      "parametros": {},
+      "aviso_parametros": "AUPA é categoria urbanístico-ambiental municipal. Caso haja cursos d'água, manguezais ou encostas > 45°, incidem também as APPs da Lei Federal nº 12.651/2012."
+    },
+    {
+      "sigla": "SA-02",
+      "nome": "Setor de Adensamento 02",
+      "grupo": "SETORES DE ADENSAMENTO — LOT",
+      "lei": "Lei Complementar nº 470/2017",
+      "artigo": "Anexos e tabelas de parâmetros da LOT (LC nº 470/2017)",
+      "finalidade": "Disciplinar o padrão de ocupação e densidade construtiva no respectivo setor de adensamento urbano.",
+      "usos_permitidos": "Conferir quadro de usos do setor SA-02 na LC nº 470/2017 consolidada.",
+      "usos_condicionados": "Atividades condicionadas previstas na LOT.",
+      "usos_proibidos": "Atividades incompatíveis com o setor SA-02 conforme LOT.",
+      "parametros": {},
+      "aviso_parametros": "Para parâmetros numéricos vigentes (CA, TO, gabarito, recuos) consulte o texto consolidado da LC nº 470/2017 e a camada SIMGeo."
+    }
+  ],
+  "dispositivos": [
+    {
+      "id": "jlle_pdds_620",
+      "lei": "Lei Complementar nº 620/2022",
+      "artigo": "Plano Diretor de Desenvolvimento Sustentável (PDDS)",
+      "anexo": null,
+      "pagina": null,
+      "titulo": "Plano Diretor de Desenvolvimento Sustentável de Joinville",
+      "texto_literal": "A Lei Complementar nº 620, de 12 de setembro de 2022, instituiu o Plano Diretor de Desenvolvimento Sustentável (PDDS) do Município de Joinville, orientando o macrozoneamento urbano e rural e articulando-se com a Lei de Ordenamento Territorial (LC nº 470/2017) e o Plano Viário (LC nº 694/2024).",
+      "palavras_chave": ["joinville", "pdds", "620", "plano diretor", "macrozoneamento"],
+      "url": "https://www.joinville.sc.gov.br/",
+      "confianca": 0.95
+    },
+    {
+      "id": "jlle_lot_470",
+      "lei": "Lei Complementar nº 470/2017",
+      "artigo": "Lei de Ordenamento Territorial (LOT)",
+      "anexo": "SIMGeo Zoneamento_2025",
+      "pagina": null,
+      "titulo": "Zoneamento, Uso e Ocupação do Solo de Joinville",
+      "texto_literal": "A Lei Complementar nº 470/2017 (LOT) disciplina os instrumentos de controle urbanístico, o zoneamento, o uso e a ocupação do solo no município de Joinville, sendo representada espacialmente pela base oficial do SIMGeo.",
+      "palavras_chave": ["joinville", "lot", "470", "zoneamento", "auap", "aupa", "sa-02", "construir", "parametros"],
+      "url": "https://geo.joinville.sc.gov.br/",
+      "confianca": 0.95
+    },
+    {
+      "id": "jlle_cota_40",
+      "lei": "Lei Complementar nº 470/2017",
+      "artigo": "Restrições de Ocupação — Cota 40",
+      "anexo": "SIMGeo Cota_40/MapServer/0",
+      "pagina": null,
+      "titulo": "Restrição altimétrica e ambiental acima da Cota 40 em Joinville",
+      "texto_literal": "A camada Cota 40 do SIMGeo delimita porções do território com restrição urbanística e ambiental ligada à altimetria e proteção de encostas/mananciais na legislação municipal de Joinville, exigindo verificação específica de viabilidade e não devendo ser confundida automaticamente com APP federal.",
+      "palavras_chave": ["joinville", "cota 40", "encosta", "ambiental", "restricao", "app", "construir"],
+      "url": "https://geo.joinville.sc.gov.br/server/rest/services/Cota_40/MapServer/0",
+      "confianca": 0.9
+    }
+  ]
+}
