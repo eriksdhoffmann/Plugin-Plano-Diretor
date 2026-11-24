@@ -64,8 +64,9 @@ def get_municipios(
     uf: str | None = Query(default=None, min_length=2, max_length=2),
     q: str | None = Query(default=None),
     situacao: str | None = Query(default=None),
+    munic_status: str | None = Query(default=None),
     com_cartografia: bool | None = Query(default=None),
-    limit: int = Query(default=100, ge=1, le=1000),
+    limit: int = Query(default=100, ge=1, le=6000),
     offset: int = Query(default=0, ge=0),
     db: Session = Depends(get_db),
 ) -> MunicipioBuscaResponse:
@@ -74,6 +75,7 @@ def get_municipios(
         uf=uf,
         q=q,
         situacao=situacao,
+        munic_status=munic_status,
         com_cartografia=com_cartografia,
         limit=limit,
         offset=offset,

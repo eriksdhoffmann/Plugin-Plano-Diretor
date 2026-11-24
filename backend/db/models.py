@@ -28,6 +28,9 @@ class Municipio(Base):
     regiao: Mapped[str] = mapped_column(String(40), nullable=False)
     mesorregiao: Mapped[str] = mapped_column(String(120), nullable=False, default="")
     microrregiao: Mapped[str] = mapped_column(String(120), nullable=False, default="")
+    munic_possui_plano: Mapped[str] = mapped_column(String(24), nullable=False, default="sem_dados", index=True)
+    munic_ano_criacao: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    munic_ano_revisao: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
     plano: Mapped["PlanoDiretor | None"] = relationship(
         back_populates="municipio_rel", uselist=False, cascade="all, delete-orphan"

@@ -17,6 +17,9 @@ SituacaoPlano = Literal[
 
 class EstatisticasNacionais(BaseModel):
     municipios_cadastrados: int
+    munic_com_plano: int = 0
+    munic_em_elaboracao: int = 0
+    munic_sem_plano: int = 0
     planos_localizados: int
     planos_vigentes: int
     documentos_fonte_oficial: int
@@ -30,6 +33,9 @@ class EstadoResumo(BaseModel):
     uf_nome: str
     regiao: str
     municipios_cadastrados: int
+    munic_com_plano: int = 0
+    munic_em_elaboracao: int = 0
+    munic_sem_plano: int = 0
     planos_localizados: int
     planos_vigentes: int
     municipios_com_cartografia: int
@@ -100,6 +106,9 @@ class MunicipioResumo(BaseModel):
     regiao: str
     mesorregiao: str = ""
     microrregiao: str = ""
+    munic_possui_plano: str = "sem_dados"
+    munic_ano_criacao: int | None = None
+    munic_ano_revisao: int | None = None
     situacao: SituacaoPlano = "nao_localizado"
     lei_principal: str | None = None
     ano_lei: int | None = None

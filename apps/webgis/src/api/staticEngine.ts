@@ -22,6 +22,9 @@ interface IbgeCompactRow {
   r: string;
   me: string;
   mi: string;
+  mp?: 'sim' | 'em_elaboracao' | 'nao' | 'sem_dados';
+  ma?: number | null;
+  mr?: number | null;
 }
 
 interface CatalogoVerificadoFile {
@@ -236,6 +239,15 @@ const geoCache = new Map<string, unknown>();
 export const staticEngine = {
   async obterEstatisticas(): Promise<EstatisticasNacionais> {
     const { ibge, catalogoMap } = await loadStaticData();
+    let munic_com_plano = 0;
+    let munic_em_elaboracao = 0;
+    let munic_sem_plano = 0;
+    for (const m of ibge) {
+      if (m.mp === 'sim') munic_com_plano += 1;
+      else if (m.mp === 'em_elaboracao') munic_em_elaboracao += 1;
+      else if (m.mp === 'nao') munic_sem_plano += 1;
+    }
+
     let planos_localizados = 0;
     let planos_vigentes = 0;
     let documentos_fonte_oficial = 0;
@@ -256,6 +268,9 @@ export const staticEngine = {
 
     return {
       municipios_cadastrados: ibge.length,
+      munic_com_plano,
+      munic_em_elaboracao,
+      munic_sem_plano,
       planos_localizados,
       planos_vigentes,
       documentos_fonte_oficial,
@@ -276,6 +291,9 @@ export const staticEngine = {
           uf_nome: m.un,
           regiao: m.r,
           municipios_cadastrados: 0,
+          munic_com_plano: 0,
+          munic_em_elaboracao: 0,
+          munic_sem_plano: 0,
           planos_localizados: 0,
           planos_vigentes: 0,
           municipios_com_cartografia: 0,
@@ -284,6 +302,10 @@ export const staticEngine = {
         map.set(m.u, est);
       }
       est.municipios_cadastrados += 1;
+      if (m.mp === 'sim') est.munic_com_plano = (est.munic_com_plano || 0) + 1;
+      else if (m.mp === 'em_elaboracao') est.munic_em_elaboracao = (est.munic_em_elaboracao || 0) + 1;
+      else if (m.mp === 'nao') est.munic_sem_plano = (est.munic_sem_plano || 0) + 1;
+
       const p = catalogoMap.get(m.c);
       if (p) {
         if (['vigente', 'localizado_em_verificacao', 'desatualizado_ou_substituido'].includes(p.situacao)) {
@@ -301,6 +323,7 @@ export const staticEngine = {
     uf?: string;
     q?: string;
     situacao?: string;
+    munic_status?: string;
     com_cartografia?: boolean;
     limit?: number;
     offset?: number;
@@ -314,6 +337,7 @@ export const staticEngine = {
     const filtrados: MunicipioResumo[] = [];
     for (const m of ibge) {
       if (ufUp && m.u !== ufUp) continue;
+      if (params.munic_status && (m.mp || 'sem_dados') !== params.munic_status) continue;
       if (qRaw) {
         if (qIsDigits) {
           if (!m.c.startsWith(qRaw)) continue;
@@ -335,6 +359,9 @@ export const staticEngine = {
         regiao: m.r,
         mesorregiao: m.me,
         microrregiao: m.mi,
+        munic_possui_plano: m.mp || 'sem_dados',
+        munic_ano_criacao: m.ma ?? null,
+        munic_ano_revisao: m.mr ?? null,
         situacao: sit,
         lei_principal: p?.lei_principal ?? null,
         ano_lei: p?.ano_lei ?? null,
@@ -419,6 +446,9 @@ export const staticEngine = {
           uf_nome: est?.uf_nome || uf,
           regiao: est?.regiao || '',
           municipios_cadastrados: est?.municipios_cadastrados ?? 0,
+          munic_com_plano: est?.munic_com_plano ?? 0,
+          munic_em_elaboracao: est?.munic_em_elaboracao ?? 0,
+          munic_sem_plano: est?.munic_sem_plano ?? 0,
           planos_localizados: est?.planos_localizados ?? 0,
           planos_vigentes: est?.planos_vigentes ?? 0,
           municipios_com_cartografia: est?.municipios_com_cartografia ?? 0,
@@ -454,6 +484,8 @@ export const staticEngine = {
           codigo_ibge: cod,
           uf: ufUp,
           nome: m?.n || cod,
+          munic_possui_plano: m?.mp || 'sem_dados',
+          munic_ano_criacao: m?.ma ?? null,
           situacao: p?.situacao || 'nao_localizado',
           lei_principal: p?.lei_principal ?? null,
           possui_cartografia: Boolean(p && (p.camadas_gis || []).length > 0),

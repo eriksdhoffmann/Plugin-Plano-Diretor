@@ -57,6 +57,7 @@ export const apiClient = {
     uf?: string;
     q?: string;
     situacao?: string;
+    munic_status?: string;
     com_cartografia?: boolean;
     limit?: number;
     offset?: number;
@@ -65,6 +66,7 @@ export const apiClient = {
     if (params.uf) qs.set('uf', params.uf);
     if (params.q) qs.set('q', params.q);
     if (params.situacao) qs.set('situacao', params.situacao);
+    if (params.munic_status) qs.set('munic_status', params.munic_status);
     if (params.com_cartografia) qs.set('com_cartografia', 'true');
     qs.set('limit', String(params.limit ?? 100));
     qs.set('offset', String(params.offset ?? 0));

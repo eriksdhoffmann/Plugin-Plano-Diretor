@@ -20,6 +20,8 @@ def test_estatisticas_reais_e_5571_municipios():
         assert resp.status_code == 200
         stats = resp.json()
         assert stats["municipios_cadastrados"] == 5571
+        assert stats["munic_com_plano"] >= 2900
+        assert stats["munic_sem_plano"] >= 2000
         assert stats["planos_localizados"] >= 3
         assert stats["planos_vigentes"] >= 2
         assert stats["municipios_com_cartografia"] >= 2

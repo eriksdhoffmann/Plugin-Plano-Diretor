@@ -36,6 +36,7 @@ from .schemas import (
 MENSAGEM_NAO_LOCALIZADO = "Plano Diretor não localizado nas fontes consultadas."
 
 IBGE_FILE = DATA_DIR / "municipios" / "municipios_ibge.json"
+MUNIC_FILE = DATA_DIR / "catalogo" / "munic_ibge_planos_diretores.json"
 CATALOGO_VERIFICADO_FILE = DATA_DIR / "catalogo" / "planos_diretores_verificados.json"
 LEGISLACAO_DIR = DATA_DIR / "legislacao"
 
@@ -53,6 +54,7 @@ def sincronizar_base_inicial(db: Session) -> dict[str, int]:
     """
     ibge_data = _carregar_json(IBGE_FILE)
     municipios_raw = ibge_data.get("municipios", [])
+    munic_data = _carregar_json(MUNIC_FILE).get("municipios", {})
 
     existentes = {
         row[0] for row in db.execute(select(Municipio.codigo_ibge)).all()
@@ -60,6 +62,7 @@ def sincronizar_base_inicial(db: Session) -> dict[str, int]:
     novos_municipios: list[Municipio] = []
     for m in municipios_raw:
         cod = str(m["codigo_ibge"])
+        mu = munic_data.get(cod, {})
         if cod not in existentes:
             novos_municipios.append(
                 Municipio(
@@ -71,6 +74,9 @@ def sincronizar_base_inicial(db: Session) -> dict[str, int]:
                     regiao=m.get("regiao", ""),
                     mesorregiao=m.get("mesorregiao", ""),
                     microrregiao=m.get("microrregiao", ""),
+                    munic_possui_plano=mu.get("munic_possui_plano", "sem_dados"),
+                    munic_ano_criacao=mu.get("munic_ano_criacao"),
+                    munic_ano_revisao=mu.get("munic_ano_revisao"),
                 )
             )
     if novos_municipios:
@@ -239,6 +245,9 @@ def sincronizar_base_inicial(db: Session) -> dict[str, int]:
 def obter_estatisticas_nacionais(db: Session) -> EstatisticasNacionais:
     """Calcula indicadores reais a partir dos registros efetivos no banco."""
     total_municipios = db.scalar(select(func.count(Municipio.codigo_ibge))) or 0
+    munic_com_plano = db.scalar(select(func.count(Municipio.codigo_ibge)).where(Municipio.munic_possui_plano == "sim")) or 0
+    munic_em_elab = db.scalar(select(func.count(Municipio.codigo_ibge)).where(Municipio.munic_possui_plano == "em_elaboracao")) or 0
+    munic_sem_plano = db.scalar(select(func.count(Municipio.codigo_ibge)).where(Municipio.munic_possui_plano == "nao")) or 0
 
     planos_localizados = (
         db.scalar(
@@ -275,6 +284,9 @@ def obter_estatisticas_nacionais(db: Session) -> EstatisticasNacionais:
 
     return EstatisticasNacionais(
         municipios_cadastrados=total_municipios,
+        munic_com_plano=munic_com_plano,
+        munic_em_elaboracao=munic_em_elab,
+        munic_sem_plano=munic_sem_plano,
         planos_localizados=planos_localizados,
         planos_vigentes=planos_vigentes,
         documentos_fonte_oficial=docs_oficiais,
@@ -285,7 +297,7 @@ def obter_estatisticas_nacionais(db: Session) -> EstatisticasNacionais:
 
 
 def listar_estados_com_cobertura(db: Session) -> list[EstadoResumo]:
-    """Retorna as 27 UFs com contadores reais de cobertura documental e cartográfica."""
+    """Retorna as 27 UFs com contadores reais de cobertura documental, IBGE MUNIC e cartográfica."""
     rows = db.execute(
         select(
             Municipio.uf,
@@ -296,6 +308,15 @@ def listar_estados_com_cobertura(db: Session) -> list[EstadoResumo]:
         .group_by(Municipio.uf, Municipio.uf_nome, Municipio.regiao)
         .order_by(Municipio.uf)
     ).all()
+
+    munic_rows = db.execute(
+        select(Municipio.uf, Municipio.munic_possui_plano)
+    ).all()
+    munic_uf: dict[str, dict[str, int]] = {}
+    for uf, st in munic_rows:
+        mb = munic_uf.setdefault(uf, {"sim": 0, "em_elaboracao": 0, "nao": 0})
+        if st in mb:
+            mb[st] += 1
 
     planos_rows = db.execute(
         select(
@@ -321,12 +342,16 @@ def listar_estados_com_cobertura(db: Session) -> list[EstadoResumo]:
     resultado: list[EstadoResumo] = []
     for uf, uf_nome, regiao, total in rows:
         b = por_uf.get(uf, {"loc": 0, "vig": 0, "cart": 0, "verif": 0})
+        mb = munic_uf.get(uf, {"sim": 0, "em_elaboracao": 0, "nao": 0})
         resultado.append(
             EstadoResumo(
                 uf=uf,
                 uf_nome=uf_nome,
                 regiao=regiao,
                 municipios_cadastrados=int(total),
+                munic_com_plano=mb["sim"],
+                munic_em_elaboracao=mb["em_elaboracao"],
+                munic_sem_plano=mb["nao"],
                 planos_localizados=b["loc"],
                 planos_vigentes=b["vig"],
                 municipios_com_cartografia=b["cart"],
@@ -346,6 +371,9 @@ def _to_resumo(m: Municipio) -> MunicipioResumo:
         regiao=m.regiao,
         mesorregiao=m.mesorregiao,
         microrregiao=m.microrregiao,
+        munic_possui_plano=m.munic_possui_plano,
+        munic_ano_criacao=m.munic_ano_criacao,
+        munic_ano_revisao=m.munic_ano_revisao,
         situacao=p.situacao if p else "nao_localizado",
         lei_principal=p.lei_principal if p else None,
         ano_lei=p.ano_lei if p else None,
@@ -361,6 +389,7 @@ def buscar_municipios(
     uf: str | None = None,
     q: str | None = None,
     situacao: str | None = None,
+    munic_status: str | None = None,
     com_cartografia: bool | None = None,
     limit: int = 100,
     offset: int = 0,
@@ -373,6 +402,9 @@ def buscar_municipios(
     if uf:
         uf_up = uf.strip().upper()
         filters.append(Municipio.uf == uf_up)
+
+    if munic_status:
+        filters.append(Municipio.munic_possui_plano == munic_status.strip().lower())
 
     if q:
         q_clean = q.strip()
@@ -448,6 +480,9 @@ def obter_municipio_detalhe(db: Session, codigo_ibge: str) -> MunicipioDetalhe |
         regiao=m.regiao,
         mesorregiao=m.mesorregiao,
         microrregiao=m.microrregiao,
+        munic_possui_plano=m.munic_possui_plano,
+        munic_ano_criacao=m.munic_ano_criacao,
+        munic_ano_revisao=m.munic_ano_revisao,
         situacao=situacao,
         lei_principal=p.lei_principal if p else None,
         ano_lei=p.ano_lei if p else None,

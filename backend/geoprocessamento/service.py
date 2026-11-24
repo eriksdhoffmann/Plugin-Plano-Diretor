@@ -170,6 +170,9 @@ def obter_geojson_estados(db: Session) -> dict[str, Any]:
         props["uf_nome"] = est.uf_nome if est else uf
         props["regiao"] = est.regiao if est else ""
         props["municipios_cadastrados"] = est.municipios_cadastrados if est else 0
+        props["munic_com_plano"] = est.munic_com_plano if est else 0
+        props["munic_em_elaboracao"] = est.munic_em_elaboracao if est else 0
+        props["munic_sem_plano"] = est.munic_sem_plano if est else 0
         props["planos_localizados"] = est.planos_localizados if est else 0
         props["planos_vigentes"] = est.planos_vigentes if est else 0
         props["municipios_com_cartografia"] = est.municipios_com_cartografia if est else 0
@@ -201,6 +204,8 @@ def obter_geojson_municipios_uf(db: Session, uf: str) -> dict[str, Any]:
         select(
             Municipio.codigo_ibge,
             Municipio.nome,
+            Municipio.munic_possui_plano,
+            Municipio.munic_ano_criacao,
             PlanoDiretor.situacao,
             PlanoDiretor.lei_principal,
             PlanoDiretor.possui_cartografia,
@@ -211,9 +216,11 @@ def obter_geojson_municipios_uf(db: Session, uf: str) -> dict[str, Any]:
     por_ibge = {
         r[0]: {
             "nome": r[1],
-            "situacao": r[2] or "nao_localizado",
-            "lei_principal": r[3],
-            "possui_cartografia": bool(r[4]) if r[4] is not None else False,
+            "munic_possui_plano": r[2],
+            "munic_ano_criacao": r[3],
+            "situacao": r[4] or "nao_localizado",
+            "lei_principal": r[5],
+            "possui_cartografia": bool(r[6]) if r[6] is not None else False,
         }
         for r in rows
     }
@@ -226,6 +233,8 @@ def obter_geojson_municipios_uf(db: Session, uf: str) -> dict[str, Any]:
         props["codigo_ibge"] = cod
         props["uf"] = uf_up
         props["nome"] = info.get("nome", cod)
+        props["munic_possui_plano"] = info.get("munic_possui_plano", "sem_dados")
+        props["munic_ano_criacao"] = info.get("munic_ano_criacao")
         props["situacao"] = info.get("situacao", "nao_localizado")
         props["lei_principal"] = info.get("lei_principal")
         props["possui_cartografia"] = info.get("possui_cartografia", False)

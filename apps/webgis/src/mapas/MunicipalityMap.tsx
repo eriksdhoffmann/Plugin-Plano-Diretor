@@ -34,9 +34,9 @@ const BASEMAPS: Record<GeoportalBasemap, { label: string; tiles: string[]; attri
     attribution: 'Malhas: IBGE • Cartografia Temática',
   },
   claro: {
-    label: 'Mapa Urbano Claro',
-    tiles: ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],
-    attribution: '© OpenStreetMap • © CARTO',
+    label: 'Mapa Urbano (OSM)',
+    tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+    attribution: '© OpenStreetMap contributors',
   },
   osm: {
     label: 'OpenStreetMap',
@@ -91,9 +91,9 @@ export function MunicipalityMap({
       sources: {
         basemap: {
           type: 'raster',
-          tiles: ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],
+          tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
           tileSize: 256,
-          attribution: '© OpenStreetMap • © CARTO • IBGE',
+          attribution: '© OpenStreetMap • IBGE',
         },
       },
       layers: [

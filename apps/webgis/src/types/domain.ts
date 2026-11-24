@@ -8,6 +8,9 @@ export type ModoIA = 'didatico' | 'tecnico' | 'prefeitura';
 
 export interface EstatisticasNacionais {
   municipios_cadastrados: number;
+  munic_com_plano?: number;
+  munic_em_elaboracao?: number;
+  munic_sem_plano?: number;
   planos_localizados: number;
   planos_vigentes: number;
   documentos_fonte_oficial: number;
@@ -21,6 +24,9 @@ export interface EstadoResumo {
   uf_nome: string;
   regiao: string;
   municipios_cadastrados: number;
+  munic_com_plano?: number;
+  munic_em_elaboracao?: number;
+  munic_sem_plano?: number;
   planos_localizados: number;
   planos_vigentes: number;
   municipios_com_cartografia: number;
@@ -91,6 +97,9 @@ export interface MunicipioResumo {
   regiao: string;
   mesorregiao: string;
   microrregiao: string;
+  munic_possui_plano?: 'sim' | 'em_elaboracao' | 'nao' | 'sem_dados' | string;
+  munic_ano_criacao?: number | null;
+  munic_ano_revisao?: number | null;
   situacao: SituacaoPlano;
   lei_principal?: string | null;
   ano_lei?: number | null;
