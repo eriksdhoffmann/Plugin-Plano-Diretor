@@ -4,19 +4,112 @@
   "uf": "SC",
   "data_verificacao": "2026-11-24",
   "url_fonte": "https://leismunicipais.com.br/a1/plano-diretor-araquari-sc",
-  "zonas_conhecidas": [],
+  "zonas_conhecidas": [
+    {
+      "sigla": "ZDU I",
+      "nome": "Zona de Diversidade Urbana I",
+      "grupo": "Área Urbana — LC nº 281/2019",
+      "lei": "Lei Complementar nº 281/2019",
+      "artigo": "Anexos 03 e 05 da LC nº 281/2019",
+      "finalidade": "Consolidar áreas urbanas centrais e consolidadas admitindo uso misto diversificado (residencial, comercial, serviços, institucional e industrial compatível de baixo impacto).",
+      "usos_permitidos": "R1, R2.a (12), R2.b (7), R3 (13)(14), C1, C2, C3, S1, S2, S3, INST1 (3), INST2 (3), INST3 (3), IND.C (3), IND.M (3)(10) — observar notas de rodapé do Anexo 05.",
+      "usos_condicionados": "Usos com notas numeradas (3), (7), (10), (12), (13) e (14) no Anexo 05 dependem de exigências específicas de porte, infraestrutura ou impacto.",
+      "usos_proibidos": "Indústrias de médio e grande porte incômodas/perigosas não enquadradas no quadro do Anexo 05.",
+      "parametros": {
+        "Taxa de Ocupação (TO)": "60%",
+        "CAL Básico": "2,5 / 2",
+        "CAL Máximo": "3,5 / 2,5",
+        "Gabarito (pavimentos)": "4",
+        "Lote Área Mínima": "240,00 m² / 600,00 m²",
+        "Testada Mínima": "10,00 m / 20,00 m",
+        "Taxa de Permeabilidade": "15% (8)",
+        "Recuo Frontal": "5,00 m / h/7 / 10,00 m"
+      },
+      "aviso_parametros": "Valores extraídos dos Anexos 03 e 05 da LC nº 281/2019 (camada digitalizada não oficial). Confirme notas numeradas e eventuais alterações posteriores junto à Prefeitura."
+    },
+    {
+      "sigla": "CIND",
+      "nome": "Corredor Industrial",
+      "grupo": "Área Urbana — LC nº 281/2019",
+      "lei": "Lei Complementar nº 281/2019",
+      "artigo": "Anexos 03 e 05 da LC nº 281/2019",
+      "finalidade": "Estruturar eixos rodoviários e áreas voltadas à implantação de atividades industriais, logísticas, comerciais e de serviços de grande porte em Araquari.",
+      "usos_permitidos": "R1 (1), C3, C4, C5, S3, S4, INST3 (3), C.IND, IND1 (3), IND2 (3), IND3 (3), IND.M (3)(10).",
+      "usos_condicionados": "Residência unifamiliar (R1) condicionada à nota (1) e atividades industriais/institucionais sujeitas a licenciamento e notas (3) e (10) do Anexo 05.",
+      "usos_proibidos": "Habitação multifamiliar intensiva (R2/R3) e usos incompatíveis com a operação industrial/logística.",
+      "parametros": {
+        "Taxa de Ocupação (TO)": "10% / 50%",
+        "CAL Básico": "0,25 / 2,5",
+        "CAL Máximo": "- / 3,5",
+        "Gabarito (pavimentos)": "2 / 4 / 8",
+        "Lote Área Mínima": "2.000,00 m²",
+        "Testada Mínima": "25,00 m",
+        "Taxa de Permeabilidade": "80% (8) / 15% (8)",
+        "Recuo Frontal": "15,00 m"
+      },
+      "aviso_parametros": "Valores extraídos dos Anexos 03 e 05 da LC nº 281/2019 (camada digitalizada não oficial)."
+    },
+    {
+      "sigla": "CURB",
+      "nome": "Corredor de Urbanidade",
+      "grupo": "Área Urbana — LC nº 281/2019",
+      "lei": "Lei Complementar nº 281/2019",
+      "artigo": "Anexos 03 e 05 da LC nº 281/2019",
+      "finalidade": "Eixo de mobilidade e centralidade urbana destinado a maior verticalização, comércio, serviços diversificados e uso misto intenso.",
+      "usos_permitidos": "R1, R2.a (12), R2.b (7), R3 (13)(14), C1 a C5, S1 a S4, INST1 (3), INST2 (3), IND.C (3), IND1 (3), IND.M (3)(10).",
+      "usos_condicionados": "Atividades sujeitas às notas do Anexo 05 da LC nº 281/2019 e outorga onerosa acima do CAL básico.",
+      "usos_proibidos": "Indústrias de alto grau poluidor ou incompatíveis com o corredor urbano conforme Anexo 05.",
+      "parametros": {
+        "Taxa de Ocupação (TO)": "50% / 60%",
+        "CAL Básico": "3,5 / 2",
+        "CAL Máximo": "4,5 / 2,5",
+        "Gabarito (pavimentos)": "12 / 4",
+        "Lote Área Mínima": "240,00 m² / 600,00 m²",
+        "Testada Mínima": "10,00 m / 20,00 m",
+        "Taxa de Permeabilidade": "15% (8)",
+        "Recuo Frontal": "5,00 m / h/7"
+      },
+      "aviso_parametros": "Valores extraídos dos Anexos 03 e 05 da LC nº 281/2019 (camada digitalizada não oficial)."
+    },
+    {
+      "sigla": "Macrozona Urbana",
+      "nome": "Macrozona Urbana de Araquari",
+      "grupo": "Macrozoneamento — Anexo 02 (LC nº 281/2019)",
+      "lei": "Lei Complementar nº 281/2019",
+      "artigo": "Anexo 02 — Macrozoneamento",
+      "finalidade": "Porção do território destinada à urbanização, concentração de infraestrutura urbana, parcelamento do solo urbano e aplicação dos índices das zonas urbanas.",
+      "usos_permitidos": "Usos urbanos definidos por cada zona específica no Anexo 03 e Anexo 05.",
+      "usos_condicionados": "Condicionados à disponibilidade de saneamento, viabilidade viária e proteção de APPs.",
+      "usos_proibidos": "Ocupações em áreas de risco ou em APPs fora das hipóteses legais.",
+      "parametros": {},
+      "aviso_parametros": "O macrozoneamento define a grande diretriz territorial; consulte a camada de Zoneamento (Anexos 03 e 05) para os índices do imóvel."
+    },
+    {
+      "sigla": "Macrozona Rural",
+      "nome": "Macrozona Rural de Araquari",
+      "grupo": "Macrozoneamento — Anexo 02 (LC nº 281/2019)",
+      "lei": "Lei Complementar nº 281/2019",
+      "artigo": "Anexo 02 — Macrozoneamento",
+      "finalidade": "Porção territorial voltada às atividades agrossilvipastoris, conservação ambiental, mananciais e preservação de áreas externas ao perímetro urbano.",
+      "usos_permitidos": "Atividades rurais, agropecuárias, florestais e usos compatíveis com o módulo mínimo rural (INCRA).",
+      "usos_condicionados": "Empreendimentos de turismo rural, infraestrutura ou agroindústria sujeitos a licenciamento e análise municipal.",
+      "usos_proibidos": "Parcelamento urbano irregular fora do perímetro urbano (vedado pela Lei Federal nº 6.766/1979).",
+      "parametros": {},
+      "aviso_parametros": "Não se aplicam os índices urbanos sem alteração legal do perímetro urbano."
+    }
+  ],
   "dispositivos": [
     {
       "id": "arq_pd_281",
       "lei": "Lei Complementar nº 281/2019",
-      "artigo": "Plano Diretor Participativo de Araquari (Referência identificada)",
-      "anexo": null,
+      "artigo": "Plano Diretor Participativo de Araquari e Anexos 02, 03 e 05",
+      "anexo": "Anexos 02 (Macrozoneamento), 03 (Zoneamento) e 05 (Parâmetros Urbanísticos)",
       "pagina": null,
-      "titulo": "Marco legal identificado do Plano Diretor de Araquari",
-      "texto_literal": "A Lei Complementar nº 281/2019 institui o Plano Diretor Participativo do Município de Araquari (SC), sucedendo a Lei Complementar nº 50/2006. O texto integral em PDF oficial da Prefeitura e os arquivos vetoriais de zoneamento ainda não foram validados nesta base devido à indisponibilidade temporária do portal araquari.sc.gov.br (HTTP 502 em 24/11/2026).",
-      "palavras_chave": ["araquari", "plano diretor", "281", "50", "zoneamento", "legislacao"],
+      "titulo": "Plano Diretor Participativo de Araquari (LC nº 281/2019)",
+      "texto_literal": "A Lei Complementar nº 281/2019 institui o Plano Diretor Participativo do Município de Araquari (SC), sucedendo a LC nº 50/2006. Seus Anexos 02, 03 e 05 definem o Macrozoneamento (Macrozona Urbana e Macrozona Rural), o Zoneamento Urbano (incluindo ZDU I, CURB, CIND e demais zonas) e os respectivos parâmetros de Taxa de Ocupação (TO), Coeficiente de Aproveitamento/CAL básico e máximo, Gabarito em pavimentos, Lote mínimo, Testada mínima, Taxa de Permeabilidade e Recuos.",
+      "palavras_chave": ["araquari", "plano diretor", "281", "zdu", "cind", "curb", "macrozona", "zoneamento", "cal", "taxa de ocupacao"],
       "url": "https://leismunicipais.com.br/a1/plano-diretor-araquari-sc",
-      "confianca": 0.75
+      "confianca": 0.88
     }
   ]
 }

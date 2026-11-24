@@ -279,7 +279,7 @@
       "url_pdf": null,
       "confiabilidade": "media",
       "data_verificacao": "2026-11-24",
-      "aviso_documental": "A Lei Complementar nº 281/2019 foi identificada como o Plano Diretor Participativo (substituindo a LC nº 50/2006). Entretanto, o portal direto araquari.sc.gov.br retornou indisponibilidade HTTP 502 na verificação de 24/11/2026 e ainda não há camada vetorial oficial indexada neste catálogo. Confirme eventuais alterações recentes diretamente junto à Prefeitura ou Câmara Municipal.",
+      "aviso_documental": "A Lei Complementar nº 281/2019 foi identificada como o Plano Diretor Participativo (substituindo a LC nº 50/2006). O texto consolidado encontra-se indexado no portal Leis Municipais e as camadas do Plano Diretor abaixo foram integradas a partir do Geoportal Araquari (digitalização não oficial dos Anexos 02, 03 e 05 da LC nº 281/2019, além das bases ambientais FBDS e IMA-SC). O portal direto araquari.sc.gov.br retornou HTTP 502 na auditoria de 24/11/2026.",
       "documentos": [
         {
           "titulo": "Plano Diretor Participativo de Araquari — LC nº 281/2019 (Portal Leis Municipais)",
@@ -292,7 +292,20 @@
           "hierarquia_fonte": 4,
           "situacao_vigencia": "aguardando_verificacao",
           "data_verificacao": "2026-11-24",
-          "observacao": "Texto consolidado indexado em repositório de legislação municipal; PDF oficial e anexos cartográficos pendentes de obtenção na Prefeitura."
+          "observacao": "Texto consolidado indexado em repositório de legislação municipal."
+        },
+        {
+          "titulo": "Geoportal Araquari — Camadas LC nº 281/2019 (Base Integrada)",
+          "tipo": "anexo_cartografico",
+          "lei_numero": "Lei Complementar nº 281/2019",
+          "ano": 2019,
+          "url": "https://eriksdhoffmann.github.io/Geoportal-Araquari/index.html?layer=pd_macrozoneamento_lc281",
+          "formato": "WebGIS / GeoJSON",
+          "fonte_oficial": "Geoportal Araquari (Base Integrada SC)",
+          "hierarquia_fonte": 7,
+          "situacao_vigencia": "aguardando_verificacao",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Geometrias digitalizadas a partir dos Anexos 02, 03 e 05 da LC nº 281/2019."
         },
         {
           "titulo": "Portal Oficial da Prefeitura de Araquari",
@@ -308,7 +321,110 @@
           "observacao": "Retornou HTTP 502 Bad Gateway durante a auditoria automática em 24/11/2026."
         }
       ],
-      "camadas_gis": [],
+      "camadas_gis": [
+        {
+          "id": "araquari_zoneamento_lc281",
+          "nome": "Zoneamento Urbano (LC nº 281/2019 — Anexos 03 e 05)",
+          "categoria": "urbanistica",
+          "tipo_servico": "geojson",
+          "url": "https://eriksdhoffmann.github.io/Geoportal-Araquari/data/pd_zoneamento_lc281.geojson",
+          "campo_codigo_zona": "zona",
+          "campo_nome_zona": "nome_zona",
+          "campo_grupo": "categoria_macro",
+          "campo_legislacao": "legislacao",
+          "campo_area": null,
+          "crs_origem": "EPSG:4326 (WGS 84)",
+          "origem_geometria": "derivada_pdf",
+          "fonte_oficial": "Digitalização não oficial — Anexos 03 e 05 da LC nº 281/2019 (Geoportal Araquari)",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Geometria derivada dos anexos em PDF da LC nº 281/2019, contendo parâmetros urbanísticos por zona."
+        },
+        {
+          "id": "araquari_macrozoneamento_lc281",
+          "nome": "Macrozoneamento Municipal (LC nº 281/2019 — Anexo 02)",
+          "categoria": "urbanistica",
+          "tipo_servico": "geojson",
+          "url": "https://eriksdhoffmann.github.io/Geoportal-Araquari/data/pd_macrozoneamento_lc281.geojson",
+          "campo_codigo_zona": "macrozona",
+          "campo_nome_zona": "macrozona",
+          "campo_grupo": "macrozona",
+          "campo_legislacao": "legislacao",
+          "campo_area": null,
+          "crs_origem": "EPSG:4326 (WGS 84)",
+          "origem_geometria": "derivada_pdf",
+          "fonte_oficial": "Digitalização não oficial — Anexo 02 da LC nº 281/2019 (Geoportal Araquari)",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Divide o território entre Macrozona Urbana e Macrozona Rural conforme Anexo 02 da LC nº 281/2019."
+        },
+        {
+          "id": "araquari_perimetro_urbano_lc281",
+          "nome": "Perímetro Urbano (LC nº 281/2019)",
+          "categoria": "urbanistica",
+          "tipo_servico": "geojson",
+          "url": "https://eriksdhoffmann.github.io/Geoportal-Araquari/data/pd_perimetro_urbano_lc281.geojson",
+          "campo_codigo_zona": "nome",
+          "campo_nome_zona": "nome",
+          "campo_grupo": null,
+          "campo_legislacao": "legislacao",
+          "campo_area": null,
+          "crs_origem": "EPSG:4326 (WGS 84)",
+          "origem_geometria": "derivada_pdf",
+          "fonte_oficial": "Digitalização não oficial — LC nº 281/2019 (Geoportal Araquari)",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Delimitação do perímetro urbano derivada da cartografia anexa à LC nº 281/2019."
+        },
+        {
+          "id": "araquari_sistema_viario_lc281",
+          "nome": "Sistema Viário do Plano Diretor (LC nº 281/2019)",
+          "categoria": "urbanistica",
+          "tipo_servico": "geojson",
+          "url": "https://eriksdhoffmann.github.io/Geoportal-Araquari/data/pd_sistema_viario_lc281.geojson",
+          "campo_codigo_zona": "hierarquia",
+          "campo_nome_zona": "nome",
+          "campo_grupo": "hierarquia",
+          "campo_legislacao": "legislacao",
+          "campo_area": null,
+          "crs_origem": "EPSG:4326 (WGS 84)",
+          "origem_geometria": "derivada_pdf",
+          "fonte_oficial": "Digitalização não oficial — LC nº 281/2019 (Geoportal Araquari)",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Hierarquia viária do Plano Diretor derivada dos anexos em PDF."
+        },
+        {
+          "id": "araquari_fbds_app",
+          "nome": "Áreas de Preservação Permanente — APP (FBDS / Referência Científica)",
+          "categoria": "ambiental",
+          "tipo_servico": "geojson",
+          "url": "https://eriksdhoffmann.github.io/Geoportal-Araquari/data/fbds_app.geojson",
+          "campo_codigo_zona": "CLASSE",
+          "campo_nome_zona": "CLASSE",
+          "campo_grupo": "HIDRO",
+          "campo_legislacao": null,
+          "campo_area": null,
+          "crs_origem": "EPSG:4326 (WGS 84)",
+          "origem_geometria": "oficial",
+          "fonte_oficial": "FBDS — Fundação Brasileira para o Desenvolvimento Sustentável (Código Florestal)",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Mapeamento temático de APP em escala 1:25.000; não substitui levantamento hidrográfico em campo."
+        },
+        {
+          "id": "araquari_ima_app_hidrografia",
+          "nome": "APP de Hidrografia (IMA-SC)",
+          "categoria": "ambiental",
+          "tipo_servico": "geojson",
+          "url": "https://eriksdhoffmann.github.io/Geoportal-Araquari/data/ima_app_hidrografia.geojson",
+          "campo_codigo_zona": "classe",
+          "campo_nome_zona": "nome",
+          "campo_grupo": null,
+          "campo_legislacao": null,
+          "campo_area": null,
+          "crs_origem": "EPSG:4326 (WGS 84)",
+          "origem_geometria": "oficial",
+          "fonte_oficial": "IMA-SC — Instituto do Meio Ambiente de Santa Catarina",
+          "data_verificacao": "2026-11-24",
+          "observacao": "Faixas de proteção hidrográfica do órgão ambiental estadual."
+        }
+      ],
       "historico_versoes": [
         {
           "lei": "Lei Complementar nº 50/2006",

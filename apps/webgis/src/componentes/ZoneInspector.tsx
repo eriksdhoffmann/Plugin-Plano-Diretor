@@ -8,6 +8,53 @@ interface ZoneInspectorProps {
   onAskAIWithZone: (sigla: string, nome: string) => void;
 }
 
+const DICIONARIO_PARAMETROS: Array<{
+  keys: string[];
+  label: string;
+  explicacao: string;
+}> = [
+  {
+    keys: ['taxa_ocupacao'],
+    label: 'Taxa de Ocupação (TO)',
+    explicacao: 'Percentual máximo do lote que a edificação pode cobrir no solo.',
+  },
+  {
+    keys: ['cal_basico'],
+    label: 'Coeficiente Básico (CAL)',
+    explicacao: 'Multiplicador gratuito da área do lote para o total de m² construídos.',
+  },
+  {
+    keys: ['cal_maximo'],
+    label: 'Coeficiente Máximo (CAL)',
+    explicacao: 'Limite máximo de construção (geralmente exige outorga onerosa acima do básico).',
+  },
+  {
+    keys: ['gabarito_pavimentos'],
+    label: 'Gabarito / Altura Máxima',
+    explicacao: 'Número máximo de pavimentos permitido na zona.',
+  },
+  {
+    keys: ['taxa_permeabilidade'],
+    label: 'Taxa de Permeabilidade',
+    explicacao: 'Percentual mínimo do terreno que deve infiltrar água da chuva.',
+  },
+  {
+    keys: ['recuo_frontal'],
+    label: 'Recuo Frontal',
+    explicacao: 'Distância mínima obrigatória entre a fachada e o alinhamento da via.',
+  },
+  {
+    keys: ['lote_area_minima'],
+    label: 'Lote Área Mínima',
+    explicacao: 'Menor tamanho de terreno permitido em novos parcelamentos.',
+  },
+  {
+    keys: ['lote_testada_minima'],
+    label: 'Testada Mínima',
+    explicacao: 'Largura mínima da frente do lote para a rua.',
+  },
+];
+
 export function ZoneInspector({ municipio, feicao, onAskAIWithZone }: ZoneInspectorProps) {
   if (!feicao) {
     return (
@@ -16,8 +63,8 @@ export function ZoneInspector({ municipio, feicao, onAskAIWithZone }: ZoneInspec
           <Info className="mx-auto mb-2 h-6 w-6 text-slate-400" />
           <p className="font-medium text-slate-800">Nenhum polígono selecionado no mapa</p>
           <p className="mt-1 text-xs text-slate-500">
-            Clique sobre qualquer polígono de zoneamento ou camada ambiental para visualizar sua
-            ficha técnica, parâmetros encontrados e fundamentação legal.
+            Clique sobre qualquer polígono no mapa para entender o que aquela área significa, seus
+            usos, parâmetros urbanísticos e fundamentação legal.
           </p>
         </div>
 
@@ -42,7 +89,7 @@ export function ZoneInspector({ municipio, feicao, onAskAIWithZone }: ZoneInspec
                       className="inline-flex items-center gap-1 rounded bg-sky-50 px-2 py-1 font-medium text-sky-800 hover:bg-sky-100"
                     >
                       <Sparkles className="h-3 w-3" />
-                      Explicar
+                      Interpretar
                     </button>
                   </div>
                   {z.finalidade && <p className="mt-1 text-slate-600">{z.finalidade}</p>}
@@ -56,8 +103,8 @@ export function ZoneInspector({ municipio, feicao, onAskAIWithZone }: ZoneInspec
   }
 
   const p = feicao.properties;
-  const sigla = String(p._pd_sigla || p.sg_zona || p.sigla_z || feicao.camadaNome);
-  const nome = String(p._pd_nome || p.nm_zona || p.legenda_m || feicao.camadaNome);
+  const sigla = String(p._pd_sigla || p.sg_zona || p.sigla_z || p.zona || feicao.camadaNome);
+  const nome = String(p._pd_nome || p.nm_zona || p.legenda_m || p.nome_zona || feicao.camadaNome);
   const grupo = p._pd_grupo ? String(p._pd_grupo) : null;
   const legislacao = p._pd_legislacao ? String(p._pd_legislacao) : municipio.lei_principal;
   const areaM2 = typeof p._pd_area_m2 === 'number' ? p._pd_area_m2 : null;
@@ -68,10 +115,29 @@ export function ZoneInspector({ municipio, feicao, onAskAIWithZone }: ZoneInspec
       z.nome.toLowerCase() === nome.toLowerCase()
   );
 
-  const parametrosEntries = Object.entries(regra?.parametros || {});
+  // Extrai parâmetros diretamente da feição (ex.: Araquari LC 281) ou da regra catalogada
+  const parametrosExtraidos: Array<{ label: string; valor: string; explicacao?: string }> = [];
+  for (const spec of DICIONARIO_PARAMETROS) {
+    const kFound = spec.keys.find((k) => p[k] !== undefined && p[k] !== null && String(p[k]).trim() !== '');
+    if (kFound) {
+      parametrosExtraidos.push({
+        label: spec.label,
+        valor: String(p[kFound]),
+        explicacao: spec.explicacao,
+      });
+    }
+  }
+  if (parametrosExtraidos.length === 0 && regra?.parametros) {
+    for (const [k, v] of Object.entries(regra.parametros)) {
+      parametrosExtraidos.push({ label: k, valor: String(v) });
+    }
+  }
+
+  const usosDaFeicao = p.usos_admitidos ? String(p.usos_admitidos) : null;
+  const avisoFeicao = p.aviso_origem ? String(p.aviso_origem) : null;
 
   return (
-    <div className="space-y-4 p-4 text-xs">
+    <div className="space-y-3.5 p-3.5 text-xs">
       {/* Cabeçalho da zona preservando nome/código original */}
       <div className="rounded-xl border border-slate-200 bg-slate-900 p-3.5 text-white">
         <div className="flex flex-wrap items-center justify-between gap-2">
@@ -98,42 +164,44 @@ export function ZoneInspector({ municipio, feicao, onAskAIWithZone }: ZoneInspec
         </div>
       </div>
 
-      {/* Botão para IA explicar esta zona */}
       <button
         type="button"
         onClick={() => onAskAIWithZone(sigla, nome)}
         className="flex w-full items-center justify-center gap-2 rounded-lg bg-sky-700 px-3 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-sky-800"
       >
         <Sparkles className="h-4 w-4" />
-        Interpretar esta zona com Assistente IA
+        Interpretar esta parte do Plano Diretor com IA
       </button>
 
-      {/* Síntese e Usos */}
-      <div className="space-y-2.5 rounded-lg border border-slate-200 bg-white p-3">
+      {/* Síntese didática e usos */}
+      <div className="space-y-2 rounded-lg border border-slate-200 bg-white p-3">
         <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
           <FileCheck2 className="h-3.5 w-3.5 text-sky-700" />
-          Síntese fundamentada na legislação local
+          O que é esta parte e como funciona
         </div>
 
         <div>
-          <span className="font-semibold text-slate-800">O que é / Finalidade:</span>
+          <span className="font-semibold text-slate-800">Finalidade territorial:</span>
           <p className="mt-0.5 text-slate-600">
             {regra?.finalidade ||
-              'Classificação espacial preservada da cartografia oficial municipal. Consulte o texto integral da lei ou acione o Assistente IA para interpretação fundamentada.'}
+              'Classificação preservada da cartografia municipal. Use o botão acima para obter a explicação didática completa em 7 blocos.'}
           </p>
         </div>
 
         <div>
-          <span className="font-semibold text-emerald-800">Atividades permitidas:</span>
+          <span className="font-semibold text-emerald-800">Atividades permitidas / admitidas:</span>
           <p className="mt-0.5 text-slate-600">
-            {regra?.usos_permitidos || 'Não foi possível determinar automaticamente apenas pelos atributos do polígono; verificar quadro de usos na lei municipal.'}
+            {regra?.usos_permitidos ||
+              usosDaFeicao ||
+              'Não foi possível determinar automaticamente apenas pelos atributos do polígono; verificar quadro de usos na lei municipal.'}
           </p>
         </div>
 
         <div>
           <span className="font-semibold text-amber-800">Atividades condicionadas:</span>
           <p className="mt-0.5 text-slate-600">
-            {regra?.usos_condicionados || 'Sujeitas à consulta da legislação complementar e exigências ambientais/viárias aplicáveis.'}
+            {regra?.usos_condicionados ||
+              'Sujeitas a notas de rodapé da lei, licenciamento ambiental e consulta de viabilidade.'}
           </p>
         </div>
 
@@ -145,24 +213,31 @@ export function ZoneInspector({ municipio, feicao, onAskAIWithZone }: ZoneInspec
         </div>
       </div>
 
-      {/* Parâmetros Urbanísticos (somente os efetivamente encontrados) */}
+      {/* Parâmetros Urbanísticos com tradução didática */}
       <div className="rounded-lg border border-slate-200 bg-white p-3">
         <h4 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
           Parâmetros Urbanísticos Encontrados
         </h4>
-        {parametrosEntries.length > 0 ? (
-          <dl className="grid grid-cols-2 gap-2">
-            {parametrosEntries.map(([k, v]) => (
-              <div key={k} className="rounded bg-slate-50 p-2">
-                <dt className="text-[10px] text-slate-500">{k}</dt>
-                <dd className="font-semibold text-slate-800">{String(v)}</dd>
+        {parametrosExtraidos.length > 0 ? (
+          <div className="space-y-2">
+            {parametrosExtraidos.map((item) => (
+              <div key={item.label} className="rounded-lg border border-slate-100 bg-slate-50 p-2">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-semibold text-slate-700">{item.label}</span>
+                  <span className="rounded bg-slate-900 px-2 py-0.5 font-mono text-[11px] font-bold text-white">
+                    {item.valor}
+                  </span>
+                </div>
+                {item.explicacao && (
+                  <p className="mt-1 text-[10px] text-slate-500">{item.explicacao}</p>
+                )}
               </div>
             ))}
-          </dl>
+          </div>
         ) : (
           <p className="rounded border border-amber-200 bg-amber-50 p-2 text-amber-900">
             {regra?.aviso_parametros ||
-              'Parâmetros numéricos (coeficiente de aproveitamento, taxa de ocupação, recuos, gabarito, lote mínimo) não estão anexados ao polígono e dependem de conferência na tabela anexa da legislação oficial municipal.'}
+              'Parâmetros numéricos (CA, TO, recuos, gabarito, lote mínimo) não estão anexados ao polígono e dependem de conferência na tabela anexa oficial do município.'}
           </p>
         )}
       </div>
@@ -172,6 +247,11 @@ export function ZoneInspector({ municipio, feicao, onAskAIWithZone }: ZoneInspec
         <div className="mb-1.5 font-semibold uppercase tracking-wide text-slate-700">
           Rastreabilidade e Proveniência
         </div>
+        {avisoFeicao && (
+          <p className="mb-2 rounded border border-amber-200 bg-amber-50 p-1.5 text-[10px] text-amber-900">
+            {avisoFeicao}
+          </p>
+        )}
         <ul className="space-y-1">
           <li>
             <strong>Zona:</strong> {sigla}
@@ -180,13 +260,13 @@ export function ZoneInspector({ municipio, feicao, onAskAIWithZone }: ZoneInspec
             <strong>Legislação aplicável:</strong> {legislacao || 'Não informada'}
           </li>
           <li>
-            <strong>Artigo / Referência:</strong> {regra?.artigo || 'Conferir texto consolidado da lei'}
+            <strong>Artigo / Anexo:</strong> {regra?.artigo || 'Conferir texto consolidado da lei'}
           </li>
           <li>
             <strong>Camada / Mapa:</strong> {feicao.camadaNome}
           </li>
           <li>
-            <strong>Fonte oficial:</strong> {feicao.fonteOficial || municipio.fonte_oficial || 'Não informada'}
+            <strong>Fonte:</strong> {feicao.fonteOficial || municipio.fonte_oficial || 'Não informada'}
           </li>
           <li>
             <strong>Data de verificação:</strong>{' '}

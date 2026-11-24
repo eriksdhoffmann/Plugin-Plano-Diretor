@@ -12,6 +12,7 @@ venv/
 # Node / WebGIS
 apps/webgis/node_modules/
 apps/webgis/dist/
+apps/webgis/public/data/
 *.tsbuildinfo
 
 # Local databases & caches (gerados em runtime)

@@ -45,10 +45,11 @@ def test_busca_e_detalhes_curitiba_joinville_araquari_e_nao_localizado():
         assert jlle["situacao"] == "vigente"
         assert "620/2022" in (jlle["lei_principal"] or "")
 
-        # Araquari 4201307 (em verificação, sem inventar vigência nem cartografia)
+        # Araquari 4201307 (em verificação, camadas LC 281 marcadas como derivada_pdf)
         arq = client.get("/api/v1/municipios/4201307").json()
         assert arq["situacao"] == "localizado_em_verificacao"
-        assert arq["possui_cartografia"] is False
+        assert arq["possui_cartografia"] is True
+        assert any(c["origem_geometria"] == "derivada_pdf" for c in arq["camadas_gis"])
 
         # Município sem plano localizado no catálogo: ex. Abdon Batista (4200051)
         abdon = client.get("/api/v1/municipios/4200051").json()

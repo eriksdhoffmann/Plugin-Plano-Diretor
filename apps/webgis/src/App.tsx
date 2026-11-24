@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react';
+import { GeoportalShell } from './componentes/GeoportalShell';
 import { HomeView } from './componentes/HomeView';
-import { MunicipalityWorkspace } from './componentes/MunicipalityWorkspace';
 
-function readIbgeFromHash(): string | null {
+function readIbgeFromUrl(): string | null {
+  const params = new URLSearchParams(window.location.search);
+  const qIbge = params.get('ibge');
+  if (qIbge && /^\d{7}$/.test(qIbge)) return qIbge;
+
   const hash = window.location.hash.replace(/^#/, '');
   const match = hash.match(/^municipio\/(\d{7})$/);
   return match ? match[1] : null;
 }
 
 export default function App() {
-  const [selectedIbge, setSelectedIbge] = useState<string | null>(() => readIbgeFromHash());
+  const [selectedIbge, setSelectedIbge] = useState<string | null>(() => readIbgeFromUrl());
 
   useEffect(() => {
-    const onHashChange = () => setSelectedIbge(readIbgeFromHash());
+    const onHashChange = () => setSelectedIbge(readIbgeFromUrl());
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
@@ -23,13 +27,16 @@ export default function App() {
   };
 
   const navigateHome = () => {
+    if (window.location.search) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
     window.location.hash = '';
     setSelectedIbge(null);
   };
 
   if (selectedIbge) {
     return (
-      <MunicipalityWorkspace
+      <GeoportalShell
         codigoIbge={selectedIbge}
         onBackHome={navigateHome}
         onChangeMunicipio={navigateToMunicipio}
